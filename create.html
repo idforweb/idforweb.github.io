@@ -1,5 +1,14 @@
 
 <html>
+<body>
+<video id='video' class='video'></video>
+<div id="webcamcontrols">
+    <button class="recordbutton" onclick="startRecording();">RECORD</button>
+    <button class="stopbutton" onclick="stopRecording();">Stop Record</button>
+</div>
+
+</body>
+
 <script language="javascript" type="text/javascript">
 function onVideoFail(e) {
     console.log('webcam fail!', e);
@@ -62,10 +71,5 @@ function onUploadSuccess() {
 }
 
 </script>
-<video id='video' class='video'></video>
-<div id="webcamcontrols">
-    <button class="recordbutton" onclick="startRecording();">RECORD</button>
-    <button class="stopbutton" onclick="stopRecording();">Stop Record</button>
-</div>
 </html>
 
