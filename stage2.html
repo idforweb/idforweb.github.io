@@ -1,14 +1,22 @@
 <html>
-<script language='text/javascript'>
+<script>
   function play_intro() {
     // insert frame
     // embed a video
-    document.getElementById('video_frame').innerHTML='<embed src=https://tc.gtisc.gatech.edu/demo/2016/drk/drk.mp4></embed>';
-  };
+    document.getElementById('video_frame').innerHTML =
+      '<p align="center"><iframe src="assets/drk.mp4" frameborder=0 border=0 width=80% height=70%></iframe></p>';
+  }
 
+  function create_id() {
+    document.getElementById('video_frame').innerHTML =
+      '<p align="center"><iframe src="create.html" frameborder=0 border=0 width=80% height=70%></iframe></p>';
+  }
 </script>
 <body>
-  <frame id='video_frame' frameborder=0 border=0></frame>
-  <button id='intro' action='play_intro();'>Play Introductory Video</button>
+  <button id='intro' onclick='javascript:play_intro();'>Play Introductory Video</button>
+  <button id='create' onclick='javascript:create_id();'>Create IDForWeb</button>
+  <button id='verify' onclick='javascript:verify_id();'>Verify IDForWeb</button>
+  <button id='survey' onclick='javascript:do_survey();'>Conduct survey</button>
+  <div id='video_frame' frameborder=0 border=0></div>
 </body>
 </html>
