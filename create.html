@@ -44,13 +44,15 @@ function startRecording() {
 function stopRecording() {
     streamRecorder.getRecordedData(postVideoToServer);
 }
+var dd;
 function postVideoToServer(videoblob) {
 
     var data = {};
     data.video = videoblob;
     data.metadata = 'test metadata';
     data.action = "upload_video";
-    jQuery.post("http://www.foundthru.co.uk/uploadvideo.php", data, onUploadSuccess);
+    dd = data;
+    //jQuery.post("http://www.foundthru.co.uk/uploadvideo.php", data, onUploadSuccess);
 }
 function onUploadSuccess() {
     alert ('video uploaded');
@@ -60,6 +62,7 @@ function onUploadSuccess() {
 <video id='video' class='video'></video>
 <div id="webcamcontrols">
     <button class="recordbutton" onclick="startRecording();">RECORD</button>
+    <button class="stopbutton" onclick="stopRecording();">Stop Record</button>
 </div>
 </html>
 
