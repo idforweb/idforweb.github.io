@@ -91,6 +91,7 @@ function postVideoToServer(videoblob) {
     data.metadata = 'test metadata';
     data.action = "upload_video";
     dd = data;
+    video.src='';
     //jQuery.post("http://www.foundthru.co.uk/uploadvideo.php", data, onUploadSuccess);
 }
 function onUploadSuccess() {
