@@ -29,6 +29,9 @@ var webcamstream;
 
 if (navigator.getUserMedia) {
   navigator.getUserMedia({audio: true, video: true}, function(stream) {
+    if(video == null) {
+      video = document.querySelector('video');
+    }
     video.src = window.URL.createObjectURL(stream);
     webcamstream = stream;
 //  streamrecorder = webcamstream.record();
