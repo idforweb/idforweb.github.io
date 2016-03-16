@@ -1,3 +1,11 @@
 <html>
-
+<script language='text/javascript'>
+function play_intro() {
+  // insert frame
+  // embed a video
+  document.getElementById('video_frame').innerHTML='<embed src=https://tc.gtisc.gatech.edu/demo/2016/drk/drk.mp4></embed>';
+}
+</script>
+<button id='intro' action='play_intro();'>Play Introductory Video</button>
+<frame id='video_frame' frameborder=0 border=0></frame>
 </html>
