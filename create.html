@@ -1,7 +1,7 @@
 
 <html>
 <body>
-<video id='video' class='video'></video>
+<video id='video' class='video' autoplay></video>
 <div id="webcamcontrols">
     <button class="recordbutton" onclick="startRecording();">RECORD</button>
     <button class="stopbutton" onclick="stopRecording();">Stop Record</button>
@@ -35,10 +35,30 @@ navigator.getUserMedia  = navigator.getUserMedia ||
 var video = document.querySelector('video');
 var streamRecorder;
 var webcamstream;
+var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 1280,
+      minHeight: 720
+    }
+  },
+  audio : true,
+};
+
+var vgaConstraints = {
+  video: {
+    mandatory: {
+      maxWidth: 640,
+      maxHeight: 360
+    }
+  },
+  audio : true,
+};
+
 
 function showVideo() {
   if (navigator.getUserMedia) {
-    navigator.getUserMedia({audio: true, video: true}, function(stream) {
+    navigator.getUserMedia(hdConstraints, function(stream) {
       if(video == null) {
         video = document.querySelector('video');
       }
