@@ -60,8 +60,10 @@ var vgaConstraints = {
 };
 
 
+var mediaRecorder;
 function showVideo() {
   if (navigator.getUserMedia) {
+    /*
     navigator.getUserMedia(hdConstraints, function(stream) {
       if(video == null) {
         video = document.querySelector('video');
@@ -70,6 +72,28 @@ function showVideo() {
       webcamstream = stream;
   //  streamrecorder = webcamstream.record();
     }, onVideoFail);
+    */
+
+  navigator.getUserMedia(hdConstraints, onMediaSuccess, onMediaError);
+
+  function onMediaSuccess(stream) {
+      mediaRecorder = new MediaStreamRecorder(stream);
+      mediaRecorder.mimeType = 'video/webm';
+      mediaRecorder.ondataavailable = function (blob) {
+          // POST/PUT "Blob" using FormData/XHR2
+          var blobURL = URL.createObjectURL(blob);
+          //document.write('' + blobURL + '');
+          if(video == null) {
+            video = document.querySelector('video');
+          }
+          video.src = window.URL.createObjectURL(stream);
+      };
+      //mediaRecorder.start(3000);
+  }
+
+
+
+
   } else {
       alert ('failed');
   }
@@ -96,6 +120,31 @@ function postVideoToServer(videoblob) {
 }
 function onUploadSuccess() {
     alert ('video uploaded');
+}
+
+// cdn.webrtc-experiment.com/MediaStreamRecorder.js
+/*
+var mediaConstraints = {
+    audio: !!navigator.mozGetUserMedia, // if firefox (don't use for chrome)
+    video: true  // if firefox or chrome
+};
+*/
+/*
+navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
+function onMediaSuccess(stream) {
+    var mediaRecorder = new MediaStreamRecorder(stream);
+    mediaRecorder.mimeType = 'video/webm';
+    mediaRecorder.ondataavailable = function (blob) {
+        // POST/PUT "Blob" using FormData/XHR2
+        var blobURL = URL.createObjectURL(blob);
+        document.write('' + blobURL + '');
+    };
+    mediaRecorder.start(3000);
+}
+*/
+function onMediaError(e) {
+    console.error('media error', e);
 }
 
 </script>
