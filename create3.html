@@ -89,7 +89,8 @@
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
     var mediaConstraints = {
-        audio: !IsChrome && !IsOpera && !IsEdge, // record both audio/video in Firefox
+        //audio: !IsChrome && !IsOpera && !IsEdge, // record both audio/video in Firefox
+        audio: true,
         video: true
     };
     document.querySelector('#start-recording').onclick = function() {
