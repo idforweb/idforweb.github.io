@@ -122,7 +122,7 @@ Edited
           var rsa_key;
           function generateRSAKeyPair() {
             var crypt = new JSEncrypt({default_key_size: 1024});
-            var dt = new Date(i);
+            var dt = new Date();
             var time = -(dt.getTime());
             crypt.getKey();
             rsa_key = crypt;
