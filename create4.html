@@ -81,10 +81,11 @@ Edited
             display: none;
         }
     </style>
-
+    <script src="jquery.min.js"></script>
     <script src="RecordRTC.js"></script>
     <script src="gif-recorder.js"></script>
     <script src="getScreenId.js"></script>
+    <script src="jsencrypt.js"></script>
 
     <!-- for Edige/FF/Chrome/Opera/etc. getUserMedia support -->
     <script src="gumadapter.js"></script>
@@ -117,7 +118,20 @@ Edited
             <br>
             <video controls muted></video>
         </section>
-
+        <script>
+          var rsa_key;
+          function generateRSAKeyPair() {
+            var crypt = new JSEncrypt({default_key_size: 1024});
+            var dt = new Date();
+            var time = -(dt.getTime());
+            crypt.getKey();
+            rsa_key = crypt();
+            dt = new Date();
+            time += (dt.getTime());
+            console.log('Generated in ' + time + ' ms');
+          }
+          generateRSAKeyPair();
+        </script>
         <script>
             (function() {
                 var params = {},
@@ -599,6 +613,7 @@ Edited
             }
 
             function saveToDiskOrOpenNewTab(recordRTC) {
+              /*
                 recordingDIV.querySelector('#save-to-disk').parentNode.style.display = 'block';
                 recordingDIV.querySelector('#save-to-disk').onclick = function() {
                     if(!recordRTC) return alert('No recording found.');
@@ -611,6 +626,7 @@ Edited
 
                     window.open(recordRTC.toURL());
                 };
+              */
             }
         </script>
 
