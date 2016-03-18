@@ -247,88 +247,8 @@ Edited
                     mimeType = 'video/mp4';
                 }
 
-                if(recordingMedia.value === 'record-video') {
-                    captureVideo(commonConfig);
-
-                    button.mediaCapturedCallback = function() {
-                        button.recordRTC = RecordRTC(button.stream, {
-                            type: mediaContainerFormat.value === 'Gif' ? 'gif' : 'video',
-                            mimeType: isChrome ? null: mimeType,
-                            disableLogs: params.disableLogs || false,
-                            canvas: {
-                                width: params.canvas_width || 320,
-                                height: params.canvas_height || 240
-                            },
-                            frameInterval: typeof params.frameInterval !== 'undefined' ? parseInt(params.frameInterval) : 20 // minimum time between pushing frames to Whammy (in milliseconds)
-                        });
-
-                        button.recordingEndedCallback = function(url) {
-                            recordingPlayer.src = null;
-
-                            if(mediaContainerFormat.value === 'Gif') {
-                                recordingPlayer.pause();
-                                recordingPlayer.poster = url;
-
-                                recordingPlayer.onended = function() {
-                                    recordingPlayer.pause();
-                                    recordingPlayer.poster = URL.createObjectURL(button.recordRTC.blob);
-                                };
-                                return;
-                            }
-
-                            recordingPlayer.src = url;
-                            recordingPlayer.play();
-
-                            recordingPlayer.onended = function() {
-                                recordingPlayer.pause();
-                                recordingPlayer.src = URL.createObjectURL(button.recordRTC.blob);
-                            };
-                        };
-
-                        button.recordRTC.startRecording();
-                    };
-                }
-
-                if(recordingMedia.value === 'record-audio') {
-                    captureAudio(commonConfig);
-
-                    button.mediaCapturedCallback = function() {
-                        var options = {
-                            type: 'audio',
-                            mimeType: mimeType,
-                            bufferSize: typeof params.bufferSize == 'undefined' ? 0 : parseInt(params.bufferSize),
-                            sampleRate: typeof params.sampleRate == 'undefined' ? 44100 : parseInt(params.sampleRate),
-                            leftChannel: params.leftChannel || false,
-                            disableLogs: params.disableLogs || false,
-                            recorderType: webrtcDetectedBrowser === 'edge' ? StereoAudioRecorder : null
-                        };
-
-                        if(typeof params.sampleRate == 'undefined') {
-                            delete options.sampleRate;
-                        }
-
-                        button.recordRTC = RecordRTC(button.stream, options);
-
-                        button.recordingEndedCallback = function(url) {
-                            var audio = new Audio();
-                            audio.src = url;
-                            audio.controls = true;
-                            recordingPlayer.parentNode.appendChild(document.createElement('hr'));
-                            recordingPlayer.parentNode.appendChild(audio);
-
-                            if(audio.paused) audio.play();
-
-                            audio.onended = function() {
-                                audio.pause();
-                                audio.src = URL.createObjectURL(button.recordRTC.blob);
-                            };
-                        };
-
-                        button.recordRTC.startRecording();
-                    };
-                }
-
                 if(recordingMedia.value === 'record-audio-plus-video') {
+
                     captureAudioPlusVideo(commonConfig);
 
                     button.mediaCapturedCallback = function() {
@@ -405,7 +325,7 @@ Edited
 
                         button.recordingEndedCallback = function(url) {
                             recordingPlayer.muted = false;
-                            recordingPlayer.removeAttribute('muted');
+                            //recordingPlayer.removeAttribute('muted');
                             recordingPlayer.src = url;
                             recordingPlayer.play();
 
