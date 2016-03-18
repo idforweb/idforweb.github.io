@@ -3,7 +3,7 @@
 
 <head>
     <title>IDForWeb Recording</title>
-
+    <script src="RecordRTC.js"></script>
     <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
     <!-- for Edige/FF/Chrome/Opera/etc. getUserMedia support -->
     <script src="https://cdn.rawgit.com/webrtc/adapter/master/adapter.js"></script>
@@ -89,19 +89,12 @@
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     }
     var mediaConstraints = {
-        //audio: !IsChrome && !IsOpera && !IsEdge, // record both audio/video in Firefox
         audio: true,
         video: true
     };
     document.querySelector('#start-recording').onclick = function() {
         this.disabled = true;
         captureUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-        /*
-        captureUserMedia({video: true, audio: true}, function(audioVideoStream) {
-        }, function(error) {
-          config.onMediaCapturingFailed(error);
-        });
-        */
     };
     document.querySelector('#stop-recording').onclick = function() {
         this.disabled = true;
@@ -131,7 +124,7 @@
         var videoHeight = document.getElementById('video-height').value || 240;
         video = mergeProps(video, {
             controls: true,
-            muted: false,
+            muted: true,
             width: videoWidth,
             height: videoHeight,
             src: URL.createObjectURL(stream)
