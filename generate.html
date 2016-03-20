@@ -17,6 +17,7 @@
 <script src='qrcode.js'></script>
 <script>
   function generate_qr_code(name, string, size) {
+    document.getElementById(name).innerHTML = '';
     var qrcode = new QRCode(name, {
       text: string,
       width: size,
