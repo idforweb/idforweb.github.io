@@ -35,6 +35,7 @@ function getDate() {
   new_arr.push(d_arr[3]);
   return new_arr.join(' ');
 }
+
 function getRandomID() {
   var int_id = (Math.random() * 10000000) | 0;
   var str_id = '' + int_id;
@@ -45,7 +46,8 @@ function getRandomID() {
   }
   return str_id;
 }
-function drawAllText(first_name, last_name, position, affiliation, id_number) {
+
+function drawAllText(first_name, last_name, position, affiliation) {
   var font = "44px arial";
   drawText("First Name: " + first_name, 500, 400, font);
   drawText("Surname: " + last_name, 500, 475, font);
@@ -53,4 +55,47 @@ function drawAllText(first_name, last_name, position, affiliation, id_number) {
   drawText("Affiliation: " + affiliation, 500, 625, font);
   drawText("Issue Date: " + getDate(), 500, 700, font);
   drawText("ID Number: " + getRandomID(), 500, 775, font);
+}
+
+function drawQR(string, x, y, size) {
+  var elem = document.getElementById('qr_canvas_1');
+  if(elem != null) {
+    elem.parentElement.removeChild(elem);
+  }
+  // create new canvas element
+  var canvas = document.createElement('canvas');
+  canvas.height = size;
+  canvas.width = size;
+  canvas.id = 'qr_canvas_' + ((Math.random() * 100000 )| 0);
+  var body =  document.getElementsByTagName('body')[0];
+  body.appendChild(canvas);
+  var qrcode = new QRCode(canvas.id, {
+    text: string,
+    width: size,
+    height: size,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H,
+  });
+
+  var cb = function callback(elem) {
+    var ctx = document.getElementById('drawcanvas').getContext('2d');
+    ctx.drawImage(elem, x, y);
+  };
+  var intervalID = setInterval(function() {
+    var elem = document.getElementById(canvas.id + '_img');
+    if(elem != null) {
+      clearInterval(intervalID);
+      cb(elem);
+    }
+  }, 10);
+}
+
+function generateID(fn, ln, pos, aff, qr1, qr2) {
+  load_ID_default();
+  drawQR(qr1, 1105, 275 ,350);
+  drawQR(qr2, 1105, 650, 350);
+  setTimeout(function () {
+    drawAllText(fn, ln, pos, aff);
+  }, 10);
 }
