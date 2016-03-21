@@ -1,19 +1,21 @@
-function draw(at, cb) {
-  var video = document.getElementById('thumbnail');
-  video.ontimeupdate = function() {
-    cb(video);
-  };
-  video.currentTime = at;
-}
+var recordingDIV = document.querySelector('.recordrtc');
+var recordingMedia = recordingDIV.querySelector('.recording-media');
+var recordingPlayer = recordingDIV.querySelector('video');
+var mediaContainerFormat = recordingDIV.querySelector('.media-container-format');
 
-function drawCanvas(at) {
-  var canvas = document.createElement('canvas');
-  canvas.width = 720;
-  canvas.height = 540;
-  var body =  document.getElementsByTagName('body')[0];
-  body.appendChild(canvas);
-  draw(at, function(video) {
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, 720, 540);
+function captureAudioPlusVideo(config) {
+  captureUserMedia({video: true, audio: true}, function(audioVideoStream) {
+    recordingPlayer.srcObject = audioVideoStream;
+    recordingPlayer.play();
+
+    config.onMediaCaptured(audioVideoStream);
+
+    audioVideoStream.onended = function() {
+      config.onMediaStopped();
+    };
+  }, function(error) {
+    config.onMediaCapturingFailed(error);
   });
 }
+
+

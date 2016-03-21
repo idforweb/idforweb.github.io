@@ -14,6 +14,7 @@ function drawText(string, x, y, font) {
 function loadID(src) {
   var ctx = document.getElementById('drawcanvas').getContext('2d');
   var imageObj = new Image();
+  imageObj.crossOrigin = "Anonymous";
   imageObj.onload = function () {
     ctx.canvas.width = imageObj.width;
     ctx.canvas.height = imageObj.height;
@@ -55,6 +56,7 @@ function drawAllText(first_name, last_name, position, affiliation) {
   drawText("Affiliation: " + affiliation, 500, 625, font);
   drawText("Issue Date: " + getDate(), 500, 700, font);
   drawText("ID Number: " + getRandomID(), 500, 775, font);
+
 }
 
 function drawQR(string, x, y, size) {
@@ -97,5 +99,8 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
   drawQR(qr2, 1105, 650, 350);
   setTimeout(function () {
     drawAllText(fn, ln, pos, aff);
+    var canvas = document.getElementById('drawcanvas');
+    var dataURL = canvas.toDataURL('image/png');
+    console.log(dataURL);
   }, 10);
 }
