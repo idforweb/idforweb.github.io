@@ -69,6 +69,7 @@ function drawQR(string, x, y, size) {
   canvas.height = size;
   canvas.width = size;
   canvas.id = 'qr_canvas_' + ((Math.random() * 100000 )| 0);
+  canvas.style='display:none';
   var body =  document.getElementsByTagName('body')[0];
   body.appendChild(canvas);
   var qrcode = new QRCode(canvas.id, {
