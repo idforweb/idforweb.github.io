@@ -101,6 +101,7 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
     drawAllText(fn, ln, pos, aff);
     var canvas = document.getElementById('drawcanvas');
     var dataURL = canvas.toDataURL('image/png');
-    console.log(dataURL);
+    var img = document.getElementById('img_id');
+    img.src = dataURL;
   }, 10);
 }
