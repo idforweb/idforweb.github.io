@@ -1,19 +1,19 @@
-function draw(at, cb) {
-  var video = document.getElementById('thumbnail');
-  video.ontimeupdate = function() {
-    cb(video);
-  };
-  video.currentTime = at;
+function getVideoElem() {
+  var video = document.getElementById('record');
+  return video;
 }
 
-function drawCanvas(at) {
-  var canvas = document.createElement('canvas');
-  canvas.width = 720;
-  canvas.height = 540;
-  var body =  document.getElementsByTagName('body')[0];
-  body.appendChild(canvas);
-  draw(at, function(video) {
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, 720, 540);
-  });
+var is_recording = false;
+function recordToggle() {
+  is_recording != is_recording;
+  var button = document.getElementById('record_btn');
+  if(is_recording) {
+    button.innerText = 'Stop Record';
+    console.log('Record Started');
+  }
+  else {
+    button.innerText = 'Start Record';
+    // finished recording
+    console.log('Record Finished');
+  }
 }
