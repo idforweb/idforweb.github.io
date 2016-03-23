@@ -23,7 +23,6 @@ var rtcRecorder = null;
 function init_recording() {
   var videoElem = document.querySelector('video');
   function onMediaSuccess(stream) {
-    /*
     rtcRecorder = new RecordRTC(stream, {
       type: 'video',
       numberOfAudioChannels: 1,
@@ -31,9 +30,9 @@ function init_recording() {
       sampleRate: 44100,
       video: videoElem,
     });
-    */
     // make the stream to be displayed on the things...
     videoElem.src = window.URL.createObjectURL(stream);
+    videoElem.play();
   }
   function onMediaError() {
     console.log("Error on opening webcam");
@@ -45,7 +44,10 @@ init_recording();
 
 function start_recording() {
   if(rtcRecorder != null) {
-    rtcRecorder.startRecording();
+    rtcRecorder.startRecording(function() {
+      video_record.src = rtcRecorder.toURL();
+      console.log('Record finished');
+    });
   }
 }
 
