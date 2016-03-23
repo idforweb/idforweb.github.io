@@ -44,8 +44,6 @@ var b2bDB = b2bDB || {
     req.onsuccess = function(evt) {
       b2bDB.db = evt.target.result;
       trace('DB is initialized');
-      //b2bDB.delete_stat_db('recv');
-      //b2bDB.delete_stat_db('send');
       b2bDB.db.onerror = function(err) {
         trace('DB error happened');
         console.dir(err);
@@ -62,24 +60,22 @@ var b2bDB = b2bDB || {
     req.onupgradeneeded = function(evt) {
       trace('upgrade is requested');
       b2bDB.db = evt.target.result;
-      if(b2bDB.db.objectStoreNames.contains("wiki-data")) {
-        b2bDB.db.deleteObjectStore('wiki-data');
+      if(b2bDB.db.objectStoreNames.contains("id-data")) {
+        b2bDB.db.deleteObjectStore('id-data');
       }
-      if(b2bDB.db.objectStoreNames.contains("wiki-stat-recv")) {
-        b2bDB.db.deleteObjectStore('wiki-stat-recv');
-      }
-      if(b2bDB.db.objectStoreNames.contains("wiki-stat-send")) {
-        b2bDB.db.deleteObjectStore('wiki-stat-send');
+      if(b2bDB.db.objectStoreNames.contains("id-metadata")) {
+        b2bDB.db.deleteObjectStore('id-metadata');
       }
 
       var objectStore =
-        b2bDB.db.createObjectStore("wiki-data", {keyPath: "objectName"});
+        b2bDB.db.createObjectStore("id-data", {keyPath: "idNumber"});
       objectStore.createIndex("timestamp", "timestamp", { unique: false });
-      objectStore.createIndex("last_modified", "last_modified", { unique: false });
-      objectStore.createIndex("hash", "hash", { unique: false });
-      objectStore.createIndex("data", "data", { unique: false });
-      objectStore.createIndex("img_list", "img_list", { unique: false });
-      objectStore.createIndex("type", "type", { unique: false });
+      objectStore.createIndex("id_picture", "id_picture", { unique: false });
+      objectStore.createIndex("public_key", "public_key", { unique: false });
+      objectStore.createIndex("private_key", "private_key", { unique: false });
+      objectStore.createIndex("time_index", "time_index", { unique: false });
+      objectStore.createIndex("phrases", "phrases", { unique: false });
+      objectStore.createIndex("videoURL", "videoURL", { unique: false });
 
       // init data after schema construction
       objectStore.transaction.oncomplete = function(event) {
@@ -91,28 +87,74 @@ var b2bDB = b2bDB || {
         // }
       };
 
-      /*
-      var objectStore_stat_recv =
-        b2bDB.db.createObjectStore("wiki-stat-recv",
-                                   { keyPath: "id", autoIncrement:true });
-      objectStore_stat_recv.createIndex("peerID", "peerID", { unique: false });
-      objectStore_stat_recv.createIndex("objectName", "objectName", { unique: false });
-      objectStore_stat_recv.createIndex("objectType", "objectType", { unique: false });
-      objectStore_stat_recv.createIndex("size", "size", { unique: false });
-      objectStore_stat_recv.createIndex("time", "time", { unique: false });
+      var objectStore_2 =
+        b2bDB.db.createObjectStore("id-metadata", {keyPath: "idNumber"});
+      objectStore_2.createIndex("timestamp", "timestamp", { unique: false });
 
-
-      var objectStore_stat_send =
-        b2bDB.db.createObjectStore("wiki-stat-send",
-                                   { keyPath: "id", autoIncrement:true });
-      objectStore_stat_send.createIndex("peerID", "peerID", { unique: false });
-      objectStore_stat_send.createIndex("objectName", "objectName", { unique: false });
-      objectStore_stat_send.createIndex("objectType", "objectType", { unique: false });
-      objectStore_stat_send.createIndex("size", "size", { unique: false });
-      */
+      // init data after schema construction
+      objectStore_2.transaction.oncomplete = function(event) {
+        /* the way how query works. arg 1 is object store name, and arg2 will be
+        * readonly or readwrite */
+        // var customerObjectStore = db.transaction("customers", "readwrite").objectStore("customers");
+        // for (var i in customerData) {
+        //    customerObjectStore.add(customerData[i]);
+        // }
+      };
 
     };
   }, // init_db END
+
+  get_all_metadata : function (success_callback) {
+    var transaction = b2bDB.db.transaction(["id-metadata"], "readonly");
+    var objectStore = transaction.objectStore("id-metadata");
+    var cursorRequest = objectStore.openCursor();
+    var aggregate = [];
+    cursorRequest.onsuccess = function (event){
+      if (event.target.result){
+        var vector = event.target.result.value;
+        var object = {};
+        object['timestamp'] = vector['timestamp'];
+        object['idNumber'] = vector['idNumber'];
+        aggregate.push(object);
+        event.target.result['continue']();
+      }
+    };
+
+    transaction.oncomplete = function (event) {
+      if(success_callback)
+        success_callback(aggregate); // return items
+    };
+  },
+
+  retrieve_id_with_number : function(number, success_callback, error_callback) {
+    var transaction = b2bDB.db.transaction(["id-data"], "readonly");
+    var objectStore = transaction.objectStore("id-data");
+    var obj = objectStore.get(number);
+    obj.onsuccess = function(evt) {
+      var result = evt.target.result;
+      if(success_callback) {
+        success_callback(result);
+      }
+    };
+
+    obj.onerror = function(err) {
+      if(error_callback) {
+        error_callback(err);
+      }
+    };
+  },
+
+  store_id : function(idNumber, public_key, private_key, id_figure, id_index, id_phrase, id_video_url, success_callback) {
+    var timestamp = Date.now();
+    var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
+    var objectStore = transaction.objectStore("id-data");
+    var request = objectStore.put(value_object);
+    request.onsuccess = function(evt) {
+      if(success_callback) {
+        success_callback(evt);
+      }
+    };
+  },
 
   query_db : function(objectName, options, success_callback, error_callback) {
     var transaction = b2bDB.db.transaction(["wiki-data"], "readonly");
@@ -155,12 +197,6 @@ var b2bDB = b2bDB || {
   clear_wiki_db : function () {
     b2bDB.clear_db('wiki-data');
   },
-  /*
-  clear_wiki_stat_db : function () {
-    b2bDB.clear_db('wiki-stat-send');
-    b2bDB.clear_db('wiki-stat-recv');
-  },
-  */
   get_wiki_data_db_size : function(size_complete_callback) {
     b2bDB.query_all_object_from_db({ with_data : true },
       function (object_list) {
@@ -216,98 +252,4 @@ var b2bDB = b2bDB || {
       success_callback(evt);
     };
   },
-
-  /*
-  add_to_stat_db : function(value_object, success_callback) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-" + value_object.type],
-                                           "readwrite");
-    var objectStore = transaction.objectStore("wiki-stat-" + value_object.type);
-    var request = objectStore.put(value_object);
-    request.onsuccess = function(evt) {
-      if(success_callback)
-        success_callback(evt);
-    };
-  },
-
-  query_stat_db : function(peerID, type, success_callback) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-" + type], "readonly");
-    var objectStore = transaction.objectStore("wiki-stat-" + type);
-    var obj = objectStore.get(peerID);
-    obj.onsuccess = function(evt) {
-      var result = evt.target.result;
-      if(success_callback) {
-        success_callback(result);
-      }
-    };
-  },
-
-  query_server_recv : function(success_callback) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-recv"], "readonly");
-    var objectStore = transaction.objectStore("wiki-stat-recv");
-    var cursorRequest = objectStore.openCursor();
-    var aggregate = [];
-    cursorRequest.onsuccess = function (event){
-      if (event.target.result){
-        if(event.target.result.value['peerID'] &&
-           event.target.result.value['peerID'] == 'server'){
-          aggregate.push(event.target.result.value);
-        }
-        event.target.result['continue']();
-      }
-    };
-
-    transaction.oncomplete = function (event) {
-      if(success_callback)
-        success_callback(aggregate); // return items
-    };
-  },
-
-  query_peer_recv : function(success_callback) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-recv"], "readonly");
-    var objectStore = transaction.objectStore("wiki-stat-recv");
-    var cursorRequest = objectStore.openCursor();
-    var aggregate = [];
-    cursorRequest.onsuccess = function (event){
-      if (event.target.result){
-        if(event.target.result.value['peerID'] &&
-           event.target.result.value['peerID'] != 'server'){
-          aggregate.push(event.target.result.value);
-        }
-        event.target.result['continue']();
-      }
-    };
-
-    transaction.oncomplete = function (event) {
-      if(success_callback)
-        success_callback(aggregate); // return items
-    };
-  },
-  query_peer_sent : function(success_callback) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-send"], "readonly");
-    var objectStore = transaction.objectStore("wiki-stat-send");
-    var cursorRequest = objectStore.openCursor();
-    var aggregate = [];
-    cursorRequest.onsuccess = function (event){
-      if (event.target.result){
-        if(event.target.result.value['peerID'] &&
-           event.target.result.value['peerID'] != 'server'){
-          aggregate.push(event.target.result.value);
-        }
-        event.target.result['continue']();
-      }
-    };
-
-    transaction.oncomplete = function (event) {
-      if(success_callback)
-        success_callback(aggregate); // return items
-    };
-  },
-
-
-  delete_stat_db : function(type) {
-    var transaction = b2bDB.db.transaction(["wiki-stat-" + type], "readwrite");
-    var objectStore = transaction.objectStore("wiki-stat-" + type);
-    objectStore.clear();
-  },
-  */
 };

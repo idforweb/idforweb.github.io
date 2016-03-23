@@ -1,3 +1,8 @@
+b2bDB.db_open_callback = function() {
+  console.log('db init');
+}
+b2bDB.init_db();
+
 function check_https() {
   var url = location.href;
   var sub = url.substring(0,5);
