@@ -348,6 +348,6 @@ function getThumbnail(videoDataURI, stamps) {
 function getThumbnailAt(video_elem, canvas_elem, time) {
   video_elem.currentTime = (time / 1000.0);
   var ctx = canvas_elem.getContext('2d');
-  ctx.drawImage(video_elem, 0, 0, canvas.width, canvas.height);
-  return canvas.toDataURL();
+  ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
+  return canvas_elem.toDataURL();
 }
