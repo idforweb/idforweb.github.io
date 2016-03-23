@@ -331,6 +331,7 @@ function getThumbnail(videoDataURI, stamps) {
     video_elem.height = video_height;
     video_elem.width = video_width;
     video_elem.id = 'video_test_thumbnail';
+    video_elem.src = videoDataURI;
 
     // create a canvas
     var canvas = document.createElement('canvas');
@@ -348,5 +349,5 @@ function getThumbnailAt(video_elem, canvas_elem, time, img) {
     var ctx = canvas_elem.getContext('2d');
     ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
     img.src = canvas_elem.toDataURL(canvas.toDataURL("image/png"));
-  }, 1000);
+  }, 300);
 }
