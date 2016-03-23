@@ -65,6 +65,7 @@ function chooseImg(id) {
   var img = document.getElementById(id_tag);
   var img_chosen = document.getElementById('chosen_img');
   img_chosen.src = img.src;
+  document.getElementById('gen').style = '';
 }
 
 
