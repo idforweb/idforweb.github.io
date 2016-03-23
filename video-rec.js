@@ -25,6 +25,7 @@ var rtcRecorder = null;
 function init_recording() {
   var videoElem = document.querySelector('video');
   function onMediaSuccess(stream) {
+    /*
     rtcRecorder = new RecordRTC(stream, {
       type: 'video',
       numberOfAudioChannels: 1,
@@ -32,7 +33,7 @@ function init_recording() {
       sampleRate: 44100,
       video: videoElem,
     });
-
+    */
     // make the stream to be displayed on the things...
     videoElem.src = window.URL.createObjectURL(stream);
   }
