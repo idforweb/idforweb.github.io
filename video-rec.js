@@ -60,7 +60,10 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
     if(typeof target_video_elem == 'string') {
       this.target_video_elem = document.getElementById(target_video_elem);
       if(this.target_video_elem != undefined) {
-        this.target_video_elem.muted = false;
+        var self = this;
+        setTimeout(function() {
+          self.target_video_elem.muted = false;
+        }, 100);
       }
     }
     this.stamps = times;
