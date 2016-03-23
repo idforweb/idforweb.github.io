@@ -14,7 +14,7 @@ window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange
 
 
 if (!window.indexedDB) {
-  trace("Your browser doesn't support a stable version of IndexedDB." +
+  console.log("Your browser doesn't support a stable version of IndexedDB." +
         "Such and such feature will not be available.");
 }
 
@@ -29,7 +29,7 @@ var b2bDB = b2bDB || {
     var req = window.indexedDB.open("b2bDB_data", 14);
     req.onerror = function(err) {
       if(err) {
-        trace('Error on opening database');
+        console.log('Error on opening database');
         var msg = 'please re-start your browser.';
         if(/firefox/.test(navigator.userAgent.toLowerCase())) {
           msg += ' Private browsing mode in Firefox is not supported.';
@@ -43,22 +43,22 @@ var b2bDB = b2bDB || {
     // on open success callback
     req.onsuccess = function(evt) {
       b2bDB.db = evt.target.result;
-      trace('DB is initialized');
+      console.log('DB is initialized');
       b2bDB.db.onerror = function(err) {
-        trace('DB error happened');
+        console.log('DB error happened');
         console.dir(err);
         throw err;
       };
       if(b2bDB.db_open_callback) {
         b2bDB.db_open_callback();
       } else {
-        trace('DB open callback is undefined');
+        console.log('DB open callback is undefined');
       }
     };
 
     // create db schema here
     req.onupgradeneeded = function(evt) {
-      trace('upgrade is requested');
+      console.log('upgrade is requested');
       b2bDB.db = evt.target.result;
       if(b2bDB.db.objectStoreNames.contains("id-data")) {
         b2bDB.db.deleteObjectStore('id-data');
@@ -202,7 +202,7 @@ var b2bDB = b2bDB || {
       function (object_list) {
         var db_size = 0;
         var idx;
-        trace("Total " + object_list.length + " objects in DB");
+        console.log("Total " + object_list.length + " objects in DB");
         async.eachSeries(object_list, function(item, callback) {
           if(item.data != undefined) {
             db_size += item.data.length;
