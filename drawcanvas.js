@@ -60,10 +60,6 @@ function drawAllText(first_name, last_name, position, affiliation) {
 }
 
 function drawQR(string, x, y, size) {
-  var elem = document.getElementById('qr_canvas_1');
-  if(elem != null) {
-    elem.parentElement.removeChild(elem);
-  }
   // create new canvas element
   var canvas = document.createElement('canvas');
   canvas.height = size;
@@ -80,6 +76,7 @@ function drawQR(string, x, y, size) {
     colorLight : "#ffffff",
     correctLevel : QRCode.CorrectLevel.H,
   });
+  console.log("Try draw QR in " + canvas.id);
 
   var cb = function callback(elem) {
     var ctx = document.getElementById('drawcanvas').getContext('2d');
@@ -90,6 +87,9 @@ function drawQR(string, x, y, size) {
     if(elem != null) {
       clearInterval(intervalID);
       cb(elem);
+    }
+    else {
+      console.log(canvas.id + " is null");
     }
   }, 10);
 }
@@ -105,5 +105,5 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
     var img = document.getElementById('img_id');
     img.src = dataURL;
     show_div_id();
-  }, 10);
+  }, 100);
 }

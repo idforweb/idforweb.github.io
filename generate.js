@@ -91,8 +91,8 @@ function do_generate_id() {
 
   // to read and heading
   var arr = Globals.phrases.splice(0);
-  arr.shift();
-  var qr1 = arr.join('~~~') + 'MMM' + Globals.phrases[0];
+  var heading = arr.shift();
+  var qr1 = arr.join('~~~') + 'MMM' + heading;
   // time and videopath
   var qr2 = Globals.indexes.join('~~~') + 'MMM' + 'Video_ID_HERE';
   generateID(Globals.fn, Globals.ln, Globals.pos, Globals.aff, qr1, qr2);
