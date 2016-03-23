@@ -54,7 +54,6 @@ function stop_recording() {
       video_record.src = rtcRecorder.toURL();
       console.log('Record finished');
     });
-
   }
 }
 
@@ -63,12 +62,19 @@ function recordToggle() {
   is_recording = !is_recording;
   var button = document.getElementById('record_btn');
   if(is_recording) {
+    var video_record = document.querySelector('video');
+    video_record.muted = true;
     button.innerText = 'Stop Record';
     console.log('Record Started');
+    start_recording();
   }
   else {
+    var video_record = document.querySelector('video');
+    video_record.muted = false;
+
     button.innerText = 'Start Record';
     // finished recording
     console.log('Record Finished');
+    stop_recording();
   }
 }
