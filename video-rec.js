@@ -95,6 +95,13 @@ PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
 };
 
+PhrasePlayer.prototype.accept_id = function() {
+  console.log('ID accpeted');
+  getThumbnail(this.target_video_elem, this.get_stamps());
+};
+
+
+
 PhrasePlayer.prototype.play_current_phrase = function() {
   // set video to the start position.
   var start_position = this.set_video_position();
@@ -176,6 +183,15 @@ PhrasePlayer.prototype.start_verify = function() {
     return button;
   }
 
+  function getAcceptButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Accept';
+    button.addEventListener('click',function() {
+      self.accept_id();
+    }, false);
+    return button;
+  }
+
   var is_the_last = this.current_position == (this.phrases.length - 1);
   var current_phrase = this.phrases[this.current_position];
   if(this.current_position == 0) {
@@ -188,7 +204,12 @@ PhrasePlayer.prototype.start_verify = function() {
   this.target_html_elem.innerText = header + current_phrase + "\n";
   this.target_html_elem.appendChild(getBackButton());
   this.target_html_elem.appendChild(getPlayButton());
-  this.target_html_elem.appendChild(getDoneButton());
+  if(is_the_last) {
+    this.target_html_elem.appendChild(getAcceptButton());
+  }
+  else {
+    this.target_html_elem.appendChild(getDoneButton());
+  }
   this.target_html_elem.appendChild(getRejectButton());
 };
 
@@ -288,4 +309,45 @@ function recordToggle() {
     console.log('Record Finished');
     stop_recording();
   }
+}
+
+/*
+ For a given data URI and the timestamp,
+ extract thumbnail...
+*/
+function getThumbnail(videoDataURI, stamps) {
+  var video_width = 640;
+  var video_height = 360;
+  // create a video element
+  var video_elem = document.createElement('video');
+  video_elem.height = video_height;
+  video_elem.width = video_width;
+  video_elem.id = 'video_test_thumbnail';
+  video_elem.src = videoDataURI;
+  //video_elem.style = 'display:none';
+
+  // create a canvas
+  var canvas = document.createElement('canvas');
+  canvas.height = video_height;
+  canvas.width = video_width;
+  canvas.id = 'canvas_test_thumbnail';
+  //canvas.style = 'display:none';
+
+  // create thumbnail
+  var i = 0;
+  var dataURIs = [];
+  for(i=0; i<stamps.length; ++i) {
+    var dataURIForThumbnail = getThumbnailAt(video_elem, canvas, time);
+    dataURIs.push(dataURIForThumbnail);
+  }
+  document.getElementById('img1').src = dataURIs[0];
+  document.getElementById('img2').src = dataURIs[1];
+  document.getElementById('img3').src = dataURIs[2];
+}
+
+function getThumbnailAt(video_elem, canvas_elem, time) {
+  video_elem.currentTime = (time / 1000.0);
+  var ctx = canvas_elem.getContext('2d');
+  ctx.drawImage(video_elem, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL();
 }
