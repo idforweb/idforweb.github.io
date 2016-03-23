@@ -44,16 +44,17 @@ init_recording();
 
 function start_recording() {
   if(rtcRecorder != null) {
-    rtcRecorder.startRecording(function() {
-      video_record.src = rtcRecorder.toURL();
-      console.log('Record finished');
-    });
+    rtcRecorder.startRecording();
   }
 }
 
 function stop_recording() {
-  if(mediaRecorder != null) {
-    mediaRecorder.stop();
+  if(rtcRecorder != null) {
+    rtcRecorder.stopRecording(function() {
+      video_record.src = rtcRecorder.toURL();
+      console.log('Record finished');
+    });
+
   }
 }
 
