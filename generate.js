@@ -1,7 +1,10 @@
 function check_https() {
   var url = location.href;
-  if(url.substring(0,5) != 'https') {
-    location.href='https' + url.substring(5);
+  var sub = url.substring(0,5);
+  if(sub != 'https') {
+    if(sub != 'file:') {
+      location.href='https://idforweb.github.io/generate.html';
+    }
   }
 }
 check_https();
