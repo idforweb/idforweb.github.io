@@ -59,7 +59,7 @@ function drawAllText(first_name, last_name, position, affiliation) {
 
 }
 
-function drawQR(string, x, y, size) {
+function drawQR(string, x, y, size, finished) {
   // create new canvas element
   var canvas = document.createElement('canvas');
   canvas.height = size;
@@ -79,9 +79,18 @@ function drawQR(string, x, y, size) {
   console.log("Try draw QR in " + canvas.id);
 
   var cb = function callback(elem) {
-    var ctx = document.getElementById('drawcanvas').getContext('2d');
-    ctx.drawImage(elem, x, y);
-    console.log('Draw canvas id ' + canvas.id);
+    if(elem.src != undefined && elem.src.length > 0 && elem.src.substring(0,10) == 'data:image')
+    {
+      var ctx = document.getElementById('drawcanvas').getContext('2d');
+      ctx.drawImage(elem, x, y);
+      console.log('Draw canvas id ' + canvas.id);
+      if(finished) {
+        finished();
+      }
+    }
+    else {
+      setTimeout(function() { callback(elem);}, 50);
+    }
   };
   var intervalID = setInterval(function() {
     var elem = document.getElementById(canvas.id + '_img');
@@ -103,16 +112,19 @@ function drawImage(img_elem) {
 
 function generateID(fn, ln, pos, aff, qr1, qr2) {
   load_ID_default();
-  drawQR(qr1, 1105, 275 ,350);
-  drawQR(qr2, 1105, 650, 350);
-  setTimeout(function () {
-    drawAllText(fn, ln, pos, aff);
-    var chosen_img = document.getElementById('chosen_img');
-    drawImage(chosen_img);
-    var canvas = document.getElementById('drawcanvas');
-    var dataURL = canvas.toDataURL('image/png');
-    var img = document.getElementById('img_id');
-    img.src = dataURL;
-    show_div_id();
-  }, 200);
+  drawQR(qr1, 1105, 275, 350, function() {
+    drawQR(qr2, 1105, 650, 350, function() {
+      drawAllText(fn, ln, pos, aff);
+      var chosen_img = document.getElementById('chosen_img');
+      drawImage(chosen_img);
+      var canvas = document.getElementById('drawcanvas');
+      var dataURL = canvas.toDataURL('image/png');
+      var img = document.getElementById('img_id');
+      img.src = dataURL;
+      show_div_id();
+    });
+  });
+//  setTimeout(function () {
+
+//  }, 200);
 }
