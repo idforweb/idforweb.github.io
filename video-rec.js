@@ -13,7 +13,7 @@ window.URL = window.URL || window.webkitURL;
 var record_constraints = {
   video : {
     width: 640,
-    height: 360,
+    height: 480,
   },
   audio : true,
 };
@@ -318,7 +318,7 @@ function recordToggle() {
 */
 function getThumbnail(videoDataURI, stamps) {
   var video_width = 640;
-  var video_height = 360;
+  var video_height = 480;
   // create thumbnail
   var i = 0;
   var images = [];
