@@ -85,6 +85,99 @@ PhrasePlayer.prototype.get_stamps = function() {
   return this.stamps.slice(0);
 };
 
+PhrasePlayer.prototype.reject_id = function() {
+  console.log('ID rejected');
+};
+
+PhrasePlayer.prototype.play_current_phrase = function() {
+  // set video to the start position.
+  var start_position = this.set_video_position();
+  // set timer for pause!
+  var next_position = this.stamps[this.current_position];
+  var self = this;
+  setTimeout(function() {
+    self.target_video_elem.pause();
+  }, next_position - start_position);
+  // play!
+  this.target_video_elem.play();
+};
+
+PhrasePlayer.prototype.set_video_position = function() {
+  var start_position = 0;
+  if(this.current_position == 0) {
+    // set position to 0.
+    this.target_video_elem.currentTime = 0;
+  }
+  else {
+    start_position = this.stamps[this.current_position - 1];
+    this.target_video_elem.currentTime = (start_position / 1000.0);
+  }
+  this.target_video_elem.pause();
+  return start_position;
+}
+
+PhrasePlayer.prototype.start_verify = function() {
+  /*
+    Show current phrase
+    Button 1: back - back to previous phrase
+    Button 2: Next - move to next phrase
+    Button 3: Reject - reject current video
+  */
+  this.set_video_position();
+  function getBackButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Back';
+    var self = this;
+    button.addEventListener('click',function() {
+      self.current_position -= 1;
+      if(self.current_position < 0) {
+        self.current_position = 0;
+      }
+      self.start_verify();
+    }, false);
+  }
+  function getPlayButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Play';
+    var self = this;
+    button.addEventListener('click',function() {
+      self.play_current_phrase();
+    }, false);
+  }
+  function getDoneButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Done';
+    var self = this;
+    button.addEventListener('click',function() {
+      self.current_position += 1;
+      self.start_verify();
+    }, false);
+  }
+  function getRejectButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Reject';
+    var self = this;
+    button.addEventListener('click',function() {
+      self.reject_id();
+    }, false);
+  }
+
+  var is_the_last = this.current_position == (this.phrases.length - 1);
+  var current_phrase = this.phrases[this.current_position];
+  if(this.current_position == 0) {
+    header = 'Your info: ';
+  }
+  else {
+    header = 'Phrase ' + this.current_position + ': ';
+  }
+
+  this.target_html_elem.innerText = header + current_phrase + "\n";
+  this.target_html_elem.appendChild(getBackButton());
+  this.target_html_elem.appendChild(getPlayButton());
+  this.target_html_elem.appendChild(getDoneButton());
+  this.target_html_elem.appendChild(getRejectButton());
+};
+
 PhrasePlayer.prototype.update_record_html = function() {
   if(this.is_started) {
     this.lap_timer();
@@ -122,7 +215,7 @@ PhrasePlayer.prototype.update_record_html = function() {
       button.innerText = 'Done';
       var self = this;
       button.addEventListener('click',function() {
-        stop_recording(self.get_stamps());
+        stop_recording(self.phrases, self.get_stamps());
       }, false);
     }
     else {
@@ -150,10 +243,14 @@ function start_recording() {
   }
 }
 
-function stop_recording(timings) {
+function stop_recording(phrases, timings) {
   if(rtcRecorder != null) {
     rtcRecorder.stopRecording(function() {
+      var video_record = document.querySelector('video');
       video_record.src = rtcRecorder.toURL();
+      video_record.muted = false;
+      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'video', timings);
+      phrasePlayer.start_verify();
       console.log('Record finished');
     });
   }
@@ -171,9 +268,6 @@ function recordToggle() {
     start_recording();
   }
   else {
-    var video_record = document.querySelector('video');
-    video_record.muted = false;
-
     button.innerText = 'Start Record';
     // finished recording
     console.log('Record Finished');
