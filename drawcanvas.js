@@ -98,7 +98,7 @@ function drawQR(string, x, y, size) {
 function drawImage(img_elem) {
     var canvas = document.getElementById('drawcanvas');
     var ctx = canvas.getContext('2d');
-    ctx.drawImage(img_elem, 50, 400, 400, 300);
+    ctx.drawImage(img_elem, 50, 420, 400, 300);
 }
 
 function generateID(fn, ln, pos, aff, qr1, qr2) {
