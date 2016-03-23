@@ -135,6 +135,7 @@ PhrasePlayer.prototype.start_verify = function() {
       }
       self.start_verify();
     }, false);
+    return button;
   }
   function getPlayButton() {
     var button = document.createElement('button');
@@ -143,6 +144,7 @@ PhrasePlayer.prototype.start_verify = function() {
     button.addEventListener('click',function() {
       self.play_current_phrase();
     }, false);
+    return button;
   }
   function getDoneButton() {
     var button = document.createElement('button');
@@ -152,6 +154,7 @@ PhrasePlayer.prototype.start_verify = function() {
       self.current_position += 1;
       self.start_verify();
     }, false);
+    return button;
   }
   function getRejectButton() {
     var button = document.createElement('button');
@@ -160,6 +163,7 @@ PhrasePlayer.prototype.start_verify = function() {
     button.addEventListener('click',function() {
       self.reject_id();
     }, false);
+    return button;
   }
 
   var is_the_last = this.current_position == (this.phrases.length - 1);
