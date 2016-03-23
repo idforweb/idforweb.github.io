@@ -319,38 +319,36 @@ function recordToggle() {
 function getThumbnail(videoDataURI, stamps) {
   var video_width = 640;
   var video_height = 360;
-  // create a video element
-  var video_elem = document.createElement('video');
-  video_elem.height = video_height;
-  video_elem.width = video_width;
-  video_elem.id = 'video_test_thumbnail';
-  video_elem.src = videoDataURI;
-  //video_elem.style = 'display:none';
-
-  // create a canvas
-  var canvas = document.createElement('canvas');
-  canvas.height = video_height;
-  canvas.width = video_width;
-  canvas.id = 'canvas_test_thumbnail';
-  //canvas.style = 'display:none';
-  var body = document.getElementsByTagName('body')[0];
-  body.appendChild(video_elem);
-  body.appendChild(canvas);
   // create thumbnail
   var i = 0;
-  var dataURIs = [];
-  for(i=0; i<stamps.length; ++i) {
-    var dataURIForThumbnail = getThumbnailAt(video_elem, canvas, stamps[i]);
-    dataURIs.push(dataURIForThumbnail);
+  var images = [];
+  images.push(document.getElementById('img1'));
+  images.push(document.getElementById('img2'));
+  images.push(document.getElementById('img3'));
+  for(i=0; i<images.length; ++i) {
+    // create a video element
+    var video_elem = document.createElement('video');
+    video_elem.height = video_height;
+    video_elem.width = video_width;
+    video_elem.id = 'video_test_thumbnail';
+
+    // create a canvas
+    var canvas = document.createElement('canvas');
+    canvas.height = video_height;
+    canvas.width = video_width;
+    canvas.id = 'canvas_test_thumbnail';
+
+    getThumbnailAt(video_elem, canvas, stamps[i], images[i]);
   }
-  document.getElementById('img1').src = dataURIs[0];
-  document.getElementById('img2').src = dataURIs[1];
-  document.getElementById('img3').src = dataURIs[2];
 }
 
-function getThumbnailAt(video_elem, canvas_elem, time) {
+function getThumbnailAt(video_elem, canvas_elem, time, img) {
   video_elem.currentTime = (time / 1000.0);
-  var ctx = canvas_elem.getContext('2d');
-  ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
-  return canvas_elem.toDataURL();
+  setTimeout(function() {
+    var ctx = canvas_elem.getContext('2d');
+    ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
+    setTimeout(function() {
+      img.src = canvas_elem.toDataURL();
+    }, 100);
+  }, 100);
 }
