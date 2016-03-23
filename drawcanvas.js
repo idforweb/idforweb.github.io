@@ -81,6 +81,7 @@ function drawQR(string, x, y, size) {
   var cb = function callback(elem) {
     var ctx = document.getElementById('drawcanvas').getContext('2d');
     ctx.drawImage(elem, x, y);
+    console.log('Draw canvas id ' + canvas.id);
   };
   var intervalID = setInterval(function() {
     var elem = document.getElementById(canvas.id + '_img');
@@ -91,7 +92,13 @@ function drawQR(string, x, y, size) {
     else {
       console.log(canvas.id + " is null");
     }
-  }, 10);
+  }, 50);
+}
+
+function drawImage(img_elem) {
+    var canvas = document.getElementById('drawcanvas');
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img_elem, 50, 520, 400, 300);
 }
 
 function generateID(fn, ln, pos, aff, qr1, qr2) {
@@ -100,6 +107,8 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
   drawQR(qr2, 1105, 650, 350);
   setTimeout(function () {
     drawAllText(fn, ln, pos, aff);
+    var chosen_img = document.getElementById('chosen_img');
+    drawImage(chosen_img);
     var canvas = document.getElementById('drawcanvas');
     var dataURL = canvas.toDataURL('image/png');
     var img = document.getElementById('img_id');
