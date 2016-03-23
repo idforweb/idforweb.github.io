@@ -11,7 +11,12 @@ navigator.getUserMedia  = navigator.getUserMedia ||
 window.URL = window.URL || window.webkitURL;
 
 var record_constraints = {
-  video : true,
+  video : {
+    mandatory: {
+      minWidth: 1280,
+      minHeight: 720,
+    }
+  },
   audio : true,
 };
 
