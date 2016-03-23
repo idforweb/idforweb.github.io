@@ -31,7 +31,7 @@ function init_recording() {
   }
   navigator.getUserMedia(record_constraints, onMediaSuccess, onMediaError);
 }
-
+var video_record = document.querySelector('video');
 init_recording();
 
 function start_recording() {

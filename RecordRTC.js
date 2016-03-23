@@ -179,7 +179,7 @@ function RecordRTC(mediaStream, config) {
 
             setTimeout(function() {
                 getDataURL(callback, _mediaRecorder);
-            }, 1000);
+            }, 50);
             return;
         }
 
@@ -1733,7 +1733,7 @@ function MediaStreamRecorder(mediaStream, config) {
             return;
         }
 
-        setTimeout(looper, 1000); // check every second
+        setTimeout(looper, 50); // check every second
     })();
 }
 
