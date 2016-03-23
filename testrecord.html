@@ -1,8 +1,25 @@
 <html>
 <body>
-<video id="record" controls muted preload="metadata" width="640px" height="360px" >
-</video>
-<button id='record_btn' onclick='javascript:recordToggle();'>Start Record</button>
+<p align="center">
+<table>
+  <tr>
+    <td>
+      <p align="center">
+      <div id="phrase">
+        <button id='record_btn' onclick='javascript:recordToggle();'>Start Record</button>
+      </div>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p align='center'>
+        <video id="record" controls muted preload="metadata" width="640px" height="360px" ></video>
+      </p>
+    </td>
+  </tr>
+</table>
+</p>
 <script src='RecordRTC.js'></script>
 <script src='video-rec.js'></script>
 </body>
