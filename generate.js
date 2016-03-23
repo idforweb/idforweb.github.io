@@ -93,6 +93,7 @@ function xor_qr(qr_string) {
     var value_b = qr_string.charCodeAt(i);
     new_string += String.fromCharCode(value_a ^ value_b);
   }
+  return new_string;
 }
 
 function do_generate_id() {
