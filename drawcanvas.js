@@ -81,12 +81,14 @@ function drawQR(string, x, y, size, finished) {
   var cb = function callback(elem) {
     if(elem.src != undefined && elem.src.length > 0 && elem.src.substring(0,10) == 'data:image')
     {
-      var ctx = document.getElementById('drawcanvas').getContext('2d');
-      ctx.drawImage(elem, x, y);
-      console.log('Draw canvas id ' + canvas.id);
-      if(finished) {
-        finished();
-      }
+      setTimeout(function() {
+        var ctx = document.getElementById('drawcanvas').getContext('2d');
+        ctx.drawImage(elem, x, y);
+        console.log('Draw canvas id ' + canvas.id);
+        if(finished) {
+          finished();
+        }
+      }, 100);
     }
     else {
       setTimeout(function() { callback(elem);}, 50);

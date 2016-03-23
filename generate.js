@@ -83,6 +83,18 @@ function chooseImg(id) {
   document.getElementById('gen').style = '';
 }
 
+function xor_qr(qr_string) {
+  var keystring = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+  var new_string = '';
+  var i;
+  for(i=0; i<qr_string.length; ++i) {
+    var idx = i % keystring.length;
+    var value_a = keystring.charCodeAt(idx);
+    var value_b = qr_string.charCodeAt(i);
+    new_string += String.fromCharCode(value_a ^ value_b);
+  }
+}
+
 function do_generate_id() {
   // get phrases
   // get indexes
@@ -95,6 +107,9 @@ function do_generate_id() {
   var qr1 = arr.join('~~~') + 'MMM' + heading;
   // time and videopath
   var qr2 = Globals.indexes.join('~~~') + 'MMM' + 'Video_ID_HERE';
+
+  qr1 = xor_qr(qr1);
+  qr2 = xor_qr(qr2);
   generateID(Globals.fn, Globals.ln, Globals.pos, Globals.aff, qr1, qr2);
 }
 
