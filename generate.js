@@ -1,3 +1,11 @@
+function check_https() {
+  var url = location.href;
+  if(url.substring(0,5) != 'https') {
+    location.href='https' + url.substring(5);
+  }
+}
+check_https();
+
 function generate_qr_code(name, string, size) {
     document.getElementById(name).innerHTML = '';
     var qrcode = new QRCode(name, {
