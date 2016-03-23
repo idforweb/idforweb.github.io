@@ -249,7 +249,7 @@ function stop_recording(phrases, timings) {
       var video_record = document.querySelector('video');
       video_record.src = rtcRecorder.toURL();
       video_record.muted = false;
-      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'video', timings);
+      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
       phrasePlayer.start_verify();
       console.log('Record finished');
     });
