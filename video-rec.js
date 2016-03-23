@@ -333,7 +333,9 @@ function getThumbnail(videoDataURI, stamps) {
   canvas.width = video_width;
   canvas.id = 'canvas_test_thumbnail';
   //canvas.style = 'display:none';
-
+  var body = document.getElementsByTagName('body')[0];
+  body.appendChild(video_elem);
+  body.appendChild(canvas);
   // create thumbnail
   var i = 0;
   var dataURIs = [];
