@@ -13,23 +13,31 @@ var record_constraints = {
   audio : true,
 };
 
-var mediaRecorder = null;
+var rtcRecorder = null;
 
-function start_recording() {
-  var video = document.querySelector('video');
+function init_recording() {
+  var videoElem = document.querySelector('video');
   function onMediaSuccess(stream) {
-    mediaRecorder = new MediaStreamRecorder(stream);
-    mediaRecorder.mimeType = 'video/webm';
-    mediaRecorder.ondataavailable = function (blob) {
-      //var blobURL = URL.createObjectURL(blob);
-      video.src = window.URL.createObjectURL(stream);
-    }
-    mediaRecorder.start();
+    rtcRecorder = new RecordRTC(stream, {
+      type: 'video',
+      numberOfAudioChannels: 1,
+      bufferSize: 16384,
+      sampleRate: 44100,
+      video: videoElem,
+    });
   }
   function onMediaError() {
     console.log("Error on opening webcam");
   }
   navigator.getUserMedia(record_constraints, onMediaSuccess, onMediaError);
+}
+
+init_recording();
+
+function start_recording() {
+  if(rtcRecorder != null) {
+    rtcRecorder.startRecording();
+  }
 }
 
 function stop_recording() {
