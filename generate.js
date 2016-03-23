@@ -111,6 +111,8 @@ function do_generate_id() {
 
   qr1 = xor_qr(qr1);
   qr2 = xor_qr(qr2);
+  console.log(xor_qr(qr1));
+  console.log(xor_qr(qr2));
   generateID(Globals.fn, Globals.ln, Globals.pos, Globals.aff, qr1, qr2);
 }
 
