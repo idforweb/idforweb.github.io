@@ -100,12 +100,14 @@ PhrasePlayer.prototype.update_record_html = function() {
     // create button, append child
     var button = document.createElement('button');
     button.innerText = 'Done';
+    var self = this;
     button.addEventListener('click',function() {
-      stop_recording(this.get_stamps());
+      stop_recording(self.get_stamps());
     }, false);
     this.target_html_elem.appendChild(button);
   }
   else {
+    var is_the_last = this.current_position == (this.phrases.length - 1);
     var current_phrase = this.phrases[this.current_position];
     var header = '';
     if(this.current_position == 0) {
@@ -116,13 +118,23 @@ PhrasePlayer.prototype.update_record_html = function() {
     }
     this.target_html_elem.innerText = header + current_phrase + "\n";
     var button = document.createElement('button');
-    button.innerText = 'Next';
-    var self = this;
-    button.addEventListener('click', function() {
-      self.update_record_html();
-    }, false);
+    if(is_the_last) {
+      button.innerText = 'Done';
+      var self = this;
+      button.addEventListener('click',function() {
+        stop_recording(self.get_stamps());
+      }, false);
+    }
+    else {
+      button.innerText = 'Next';
+      var self = this;
+      button.addEventListener('click', function() {
+        self.update_record_html();
+      }, false);
+    }
     this.target_html_elem.appendChild(button);
     this.current_position += 1;
+    console.log("Updated with phrase[" + this.current_position + "]: " + current_phrase);
   }
 };
 
@@ -133,6 +145,7 @@ var phrasePlayer = new PhrasePlayer(all_phrases, 'record', 'phrase');
 function start_recording() {
   if(rtcRecorder != null) {
     rtcRecorder.startRecording();
+    console.log('start recording');
     phrasePlayer.update_record_html();
   }
 }
