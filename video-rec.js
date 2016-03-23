@@ -337,7 +337,7 @@ function getThumbnail(videoDataURI, stamps) {
   var i = 0;
   var dataURIs = [];
   for(i=0; i<stamps.length; ++i) {
-    var dataURIForThumbnail = getThumbnailAt(video_elem, canvas, time);
+    var dataURIForThumbnail = getThumbnailAt(video_elem, canvas, stamps[i]);
     dataURIs.push(dataURIForThumbnail);
   }
   document.getElementById('img1').src = dataURIs[0];
