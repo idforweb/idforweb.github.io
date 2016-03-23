@@ -226,6 +226,7 @@ PhrasePlayer.prototype.update_record_html = function() {
       button.innerText = 'Done';
       var self = this;
       button.addEventListener('click',function() {
+        self.lap_timer();
         stop_recording(self.phrases, self.get_stamps());
       }, false);
     }
