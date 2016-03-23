@@ -8,6 +8,8 @@ navigator.getUserMedia  = navigator.getUserMedia ||
   navigator.mozGetUserMedia ||
   navigator.msGetUserMedia;
 
+window.URL = window.URL || window.webkitURL;
+
 var record_constraints = {
   video : true,
   audio : true,
@@ -25,6 +27,9 @@ function init_recording() {
       sampleRate: 44100,
       video: videoElem,
     });
+
+    // make the stream to be displayed on the things...
+    videoElem.src = window.URL.createObjectURL(stream);
   }
   function onMediaError() {
     console.log("Error on opening webcam");
