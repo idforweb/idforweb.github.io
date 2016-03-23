@@ -97,6 +97,8 @@ PhrasePlayer.prototype.play_current_phrase = function() {
   var start_position = this.set_video_position();
   // set timer for pause!
   var next_position = this.stamps[this.current_position];
+  console.log('start ' + start_position + ' end ' + next_position + ' stamps: ');
+  console.dir(this.stamps);
   var self = this;
   setTimeout(function() {
     self.target_video_elem.pause();
@@ -158,6 +160,7 @@ PhrasePlayer.prototype.start_verify = function() {
     button.innerText = 'Done';
     button.addEventListener('click',function() {
       self.verify_next();
+      self.play_current_phrase();
     }, false);
     return button;
   }
