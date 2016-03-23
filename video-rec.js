@@ -97,7 +97,7 @@ PhrasePlayer.prototype.reject_id = function() {
 
 PhrasePlayer.prototype.accept_id = function() {
   console.log('ID accpeted');
-  getThumbnail(this.target_video_elem, this.get_stamps());
+  getThumbnail(this.target_video_elem.src, this.get_stamps());
 };
 
 
