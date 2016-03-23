@@ -42,10 +42,6 @@ function init_recording() {
 var video_record = document.querySelector('video');
 init_recording();
 
-var test_affs = 'Yeongjin Jang, Researcher at GT-IISP. Today is Mar 22nd, 2016';
-var test_phrases = ['tasty avocado', 'handsome lion', 'opened sesame'];
-var indexes = [];
-var all_phrases = [test_affs].concat(test_phrases);
 
 function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times) {
   this.timer = null;
@@ -233,7 +229,8 @@ PhrasePlayer.prototype.update_record_html = function() {
     button.innerText = 'Done';
     var self = this;
     button.addEventListener('click',function() {
-      stop_recording(self.get_stamps());
+      self.lap_timer();
+      stop_recording(self.phrases, self.get_stamps());
     }, false);
     this.target_html_elem.appendChild(button);
   }
@@ -271,15 +268,12 @@ PhrasePlayer.prototype.update_record_html = function() {
 };
 
 
-
-var phrasePlayer = new PhrasePlayer(all_phrases, 'record', 'phrase');
-
 function start_recording() {
   if(rtcRecorder != null) {
     rtcRecorder.startRecording();
     console.log('start recording');
-    phrasePlayer.update_record_html();
   }
+  phrasePlayer.update_record_html();
 }
 var video_uri = null;
 function stop_recording(phrases, timings) {
