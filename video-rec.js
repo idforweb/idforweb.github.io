@@ -58,7 +58,7 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   if(mode == 'verify') {
     this.target_video_elem = target_video_elem;
     if(typeof target_video_elem == 'string') {
-      this.target_video_leme = document.getElementById(target_video_elem);
+      this.target_video_elem = document.getElementById(target_video_elem);
     }
     this.stamps = times;
   }
