@@ -12,8 +12,8 @@ window.URL = window.URL || window.webkitURL;
 
 var record_constraints = {
   video : {
-    width: 360,
-    height: 640,
+    width: 640,
+    height: 360,
   },
   audio : true,
 };
