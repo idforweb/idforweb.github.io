@@ -12,10 +12,8 @@ window.URL = window.URL || window.webkitURL;
 
 var record_constraints = {
   video : {
-    mandatory: {
-      minWidth: 720,
-      minHeight: 540,
-    }
+    width: 720,
+    height: 540,
   },
   audio : true,
 };
