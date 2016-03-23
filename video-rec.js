@@ -278,12 +278,13 @@ function start_recording() {
     phrasePlayer.update_record_html();
   }
 }
-
+var video_uri = null;
 function stop_recording(phrases, timings) {
   if(rtcRecorder != null) {
     rtcRecorder.stopRecording(function() {
       var video_record = document.querySelector('video');
-      video_record.src = rtcRecorder.toURL();
+      video_uri = rtcRecorder.toURL();
+      video_record.src = video_uri;
       video_record.muted = false;
       phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
       phrasePlayer.start_verify();
