@@ -348,6 +348,6 @@ function getThumbnailAt(video_elem, canvas_elem, time, img) {
   setTimeout(function() {
     var ctx = canvas_elem.getContext('2d');
     ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
-    img.src = canvas_elem.toDataURL(canvas.toDataURL("image/png"));
+    img.src = canvas_elem.toDataURL("image/png");
   }, 300);
 }
