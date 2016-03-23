@@ -45,8 +45,8 @@ function generate_phrases() {
   var all_phrases = [phrase_0].concat(phrases);
   return all_phrases;
 }
-
 var phrasePlayer = undefined;
+
 function show_record() {
   document.getElementById('recording').style = '';
   hide_main();
@@ -55,8 +55,18 @@ function show_record() {
   console.dir(all_phrases);
   phrasePlayer = new PhrasePlayer(all_phrases, 'record', 'phrase');
 }
+
 function hide_record() {
   document.getElementById('recording').style = 'display:none;';
+  show_main();
+}
+
+function show_div_id() {
+  document.getElementById('div_showing_id').style = '';
+  hide_main();
+}
+function hide_div_id() {
+  document.getElementById('div_showing_id').style = 'display:none;';
   show_main();
 }
 
@@ -66,6 +76,13 @@ function chooseImg(id) {
   var img_chosen = document.getElementById('chosen_img');
   img_chosen.src = img.src;
   document.getElementById('gen').style = '';
+}
+
+function do_generate_id() {
+  // get phrases
+  // get indexes
+  // get fn, ln, pos, aff
+  // get img
 }
 
 
