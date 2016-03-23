@@ -40,9 +40,14 @@ function generate_phrases() {
   var ln = document.getElementById('ln').value;
   var pos = document.getElementById('pos').value;
   var aff = document.getElementById('aff').value;
+  Globals.fn = fn;
+  Globals.ln = ln;
+  Globals.pos = pos;
+  Globals.aff = aff;
   var phrase_0 = fn + " " + ln + ", " + pos + " at " + aff + ", today is " +
     get_date_string();
   var all_phrases = [phrase_0].concat(phrases);
+  Globals.phrases = all_phrases;
   return all_phrases;
 }
 var phrasePlayer = undefined;
@@ -83,6 +88,14 @@ function do_generate_id() {
   // get indexes
   // get fn, ln, pos, aff
   // get img
+
+  // to read and heading
+  var arr = Globals.phrases.splice(0);
+  arr.shift();
+  var qr1 = arr.join('~~~') + 'MMM' + Globals.phrases[0];
+  // time and videopath
+  var qr2 = Globals.indexes.join('~~~') + 'MMM' + 'Video_ID_HERE';
+  generateID(Globals.fn, Globals.ln, Globals.pos, Globals.aff, qr1, qr2);
 }
 
 

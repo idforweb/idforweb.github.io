@@ -286,6 +286,9 @@ function stop_recording(phrases, timings) {
       phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
       phrasePlayer.start_verify();
       console.log('Record finished');
+      if(timings != undefined) {
+        Globals.indexes = timings;
+      }
     });
   }
 }
