@@ -119,6 +119,11 @@ PhrasePlayer.prototype.set_video_position = function() {
   return start_position;
 }
 
+PhrasePlayer.prototype.verify_next = function() {
+  this.current_position += 1;
+  return this.start_verify();
+}
+
 PhrasePlayer.prototype.start_verify = function() {
   /*
     Show current phrase
@@ -127,10 +132,10 @@ PhrasePlayer.prototype.start_verify = function() {
     Button 3: Reject - reject current video
   */
   this.set_video_position();
+  var self = this;
   function getBackButton() {
     var button = document.createElement('button');
     button.innerText = 'Back';
-    var self = this;
     button.addEventListener('click',function() {
       self.current_position -= 1;
       if(self.current_position < 0) {
@@ -143,7 +148,6 @@ PhrasePlayer.prototype.start_verify = function() {
   function getPlayButton() {
     var button = document.createElement('button');
     button.innerText = 'Play';
-    var self = this;
     button.addEventListener('click',function() {
       self.play_current_phrase();
     }, false);
@@ -152,17 +156,14 @@ PhrasePlayer.prototype.start_verify = function() {
   function getDoneButton() {
     var button = document.createElement('button');
     button.innerText = 'Done';
-    var self = this;
     button.addEventListener('click',function() {
-      self.current_position += 1;
-      self.start_verify();
+      self.verify_next();
     }, false);
     return button;
   }
   function getRejectButton() {
     var button = document.createElement('button');
     button.innerText = 'Reject';
-    var self = this;
     button.addEventListener('click',function() {
       self.reject_id();
     }, false);
