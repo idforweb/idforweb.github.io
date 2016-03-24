@@ -73,6 +73,10 @@ function upload_to_s3_with_number(idNumber) {
     upload_to_s3(result, function() {
       result['uploaded'] = true;
       b2bDB.update_id(result);
+      var img2 = document.getElementById('img_' + result['idNumber']);
+      if(img2) {
+        img2.style='display:none;';
+      }
       alert('uploading of ' + idNumber + ' is succeeded');
       window.location.reload();
     }, function () {

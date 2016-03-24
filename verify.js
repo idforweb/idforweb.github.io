@@ -47,9 +47,15 @@ function draw_id(id) {
     }
   })(id);
   p.appendChild(img);
+  var img2 = document.createElement('br');
+  img2.src = 'indicator.gif';
+  img2.style = 'display:none;';
+  img2.id = 'img_' + id['idNumber'];
   var button = document.createElement('button');
   button.addEventListener('click', function() {
     upload_to_s3_with_number(id['idNumber']);
+    // add indicator
+    img2.style = '';
   });
 
   if(id['uploaded']) {
@@ -68,6 +74,7 @@ function draw_id(id) {
   p.appendChild(b);
   p.appendChild(br2);
   p.appendChild(button);
+  p.appendChild(img2);
   p.appendChild(br3);
   p.appendChild(br4);
 }
