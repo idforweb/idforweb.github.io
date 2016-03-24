@@ -55,7 +55,9 @@ function drawAllText(first_name, last_name, position, affiliation) {
   drawText("Position: " + position, 500, 550, font);
   drawText("Affiliation: " + affiliation, 500, 625, font);
   drawText("Issue Date: " + getDate(), 500, 700, font);
-  drawText("ID Number: " + getRandomID(), 500, 775, font);
+  var idNumber = getRandomID();
+  Globals.idNumber = idNumber;
+  drawText("ID Number: " + idNumber, 500, 775, font);
 
 }
 
@@ -125,9 +127,18 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
       img.src = dataURL;
       Globals.id_figure = dataURL;
       show_div_id();
+      // store into DB
+      b2bDB.store_id(Globals.idNumber,
+                    Globals.key.getPublicKey(),
+                    Globals.key.getPrivateKey(),
+                    Globals.id_figure,
+                    Globals.id_index,
+                    Globals.phrases,
+                    Globals.video_data_uri);
     });
   });
 //  setTimeout(function () {
 
 //  }, 200);
 }
+
