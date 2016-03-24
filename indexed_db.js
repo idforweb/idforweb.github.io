@@ -158,13 +158,26 @@ var b2bDB = b2bDB || {
     value_object['phrases'] = id_phrase;
     value_object['videoURL'] = id_video_url;
 
+    var object_2 = {};
+    object_2['timestamp'] = value_object['timestamp'];
+    object_2['idNumber'] = idNumber;
+
+
     var request = objectStore.put(value_object);
     request.onsuccess = function(evt) {
       if(success_callback) {
         success_callback(evt);
       }
     };
-  },
+    var transaction_2 = b2bDB.db.transaction(["id-metadata"], "readwrite");
+    var objectStore_2 = transaction.objectStore("id-metadata");
+    var request_2 = objectStore_2.put(object_2);
+    request_2.onsuccess = function(evt) {
+      if(success_callback) {
+        success_callback(evt);
+      }
+    };
+},
 
   query_db : function(objectName, options, success_callback, error_callback) {
     var transaction = b2bDB.db.transaction(["wiki-data"], "readonly");
