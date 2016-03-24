@@ -151,7 +151,6 @@ var b2bDB = b2bDB || {
     var request = objectStore.delete(idNumber);
     request.onsuccess = function(evt) {
       if(success_callback) {
-        success_callback(evt);
       }
     };
     var transaction_2 = b2bDB.db.transaction(["id-metadata"], "readwrite");
