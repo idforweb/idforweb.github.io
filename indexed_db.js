@@ -154,7 +154,7 @@ var b2bDB = b2bDB || {
         success_callback(evt);
       }
     };
-  }
+  },
 
   store_id : function(idNumber, public_key, private_key, id_figure, id_index, id_phrase, id_video_url, uploaded, success_callback) {
     var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
