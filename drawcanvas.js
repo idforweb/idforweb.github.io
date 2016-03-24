@@ -41,7 +41,7 @@ function getDate() {
 }
 
 function getRandomID() {
-  var int_id = (Math.random() * 10000000) | 0;
+  var int_id = (Math.random() * 100000000) | 0;
   var str_id = '' + int_id;
 
   var add = (9 - str_id.length);
