@@ -384,7 +384,7 @@ function RecordRTC(mediaStream, config) {
             }
             var reader = new FileReader();
             reader.onload = function(e) {cb(e.target.result);}
-            reader.readAsDataURL(blob);
+            reader.readAsDataURL(mediaRecorder.blob);
         },
 
         /**
