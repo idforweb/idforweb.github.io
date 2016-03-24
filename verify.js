@@ -33,6 +33,7 @@ function draw_id(id) {
   img.src = id['id_picture'];
   img.onclick = (function(ID) {
     return function() {
+      console.dir(ID);
       console.log('I wanna verify ' + ID['idNumber']);
       // do something
       // create PhrasePlayer
