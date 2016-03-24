@@ -61,11 +61,19 @@ function draw_id(id) {
   });
 
   if(id['uploaded']) {
-    button.innerText = 'Click to upload (already uploaded, takes few seconds)';
+    button.innerText = 'Click to upload (already uploaded)';
   }
   else {
-    button.innerText = 'Click to upload (not uploaded, takes few seconds)';
+    button.innerText = 'Click to upload (not uploaded)';
   }
+
+  var button2 = document.createElement('button');
+  button2.addEventListener('click', function() {
+    b2bDB.delete_id(id['idNumber'], function() {
+      window.location.reload();
+    });
+  });
+  button2.innerText = 'Delete ID';
   var b = document.createElement('b');
   b.innerText = 'ID: ' + id['idNumber'];
   var br = document.createElement('br');
@@ -76,6 +84,7 @@ function draw_id(id) {
   p.appendChild(b);
   p.appendChild(br2);
   p.appendChild(button);
+  p.appendChild(button2);
   p.appendChild(img2);
   p.appendChild(br3);
   p.appendChild(br4);
