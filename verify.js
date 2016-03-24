@@ -31,20 +31,19 @@ function draw_id(id) {
   img.width = 400;
   img.height = 300;
   img.src = id['id_picture'];
-  console.dir(id);
-  img.onclick = (function(idNumber) {
+  img.onclick = (function(ID) {
     return function() {
-      console.log('I wanna verify ' + idNumber);
+      console.log('I wanna verify ' + ID['idNumber']);
       // do something
       // create PhrasePlayer
-      phrasePlayer = new PhrasePlayer(id['phrases'], 'verify',
-                                      'phrase', 'record', id['time_index']);
+      phrasePlayer = new PhrasePlayer(ID['phrases'], 'verify',
+                                      'phrase', 'record', ID['time_index']);
       var video = document.getElementById('record');
-      video.src = id['videoURL'];
+      video.src = ID['videoURL'];
       // show verify
       show_verify();
     }
-  }(id['idNumber']));
+  })(id);
   p.appendChild(img);
   var br = document.createElement('br');
   p.appendChild(br);
