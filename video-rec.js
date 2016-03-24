@@ -90,6 +90,11 @@ PhrasePlayer.prototype.get_stamps = function() {
 PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
   alert('ID is rejected!');
+  if(hide_verify != undefined) {
+    hide_verify();
+  }
+  // move to survey
+  location.href='https://goo.gl/forms/xhxUZ5GhZp';
 };
 
 PhrasePlayer.prototype.accept_id = function() {
@@ -105,6 +110,7 @@ PhrasePlayer.prototype.accept_id = function() {
     if(hide_verify != undefined) {
       hide_verify();
     }
+    location.href='https://goo.gl/forms/xhxUZ5GhZp';
   }
 };
 
