@@ -65,7 +65,7 @@ function upload_to_s3(id_object, cb_ok, cb_fail) {
 }
 
 function upload_to_s3_with_number(idNumber) {
-  b2bDB.retrieve_id_with_number(idNumber, function() {
+  b2bDB.retrieve_id_with_number(idNumber, function(result) {
     upload_to_s3(result, function() {
       alert('uploading of ' + idNumber + ' is succeeded');
     }, function () {
