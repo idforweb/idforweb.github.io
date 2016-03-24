@@ -21,11 +21,11 @@ function draw_id(id) {
 }
 
 function loaded_all() {
-  // key list at VerifyGlobals.num_array[0]['idNumber'];
+  // key list at VerifyGlobals.num_array[i]['idNumber'];
   // IDs at VerifyGlobals.IDs[idNumber];
   var i;
   for(i=0; i<VerifyGlobals.num_array.length; ++i) {
-    var idNumber = VerifyGlobals.num_array[0]['idNumber'];
+    var idNumber = VerifyGlobals.num_array[i]['idNumber'];
     var ID = VerifyGlobals.IDs[idNumber];
     // draw at here!
     (function(id) {
