@@ -11,7 +11,7 @@ function drawText(string, x, y, font) {
   ctx.fillText(string, x, y);
 }
 
-function loadID(src) {
+function loadID(src, cb) {
   var ctx = document.getElementById('drawcanvas').getContext('2d');
   var imageObj = new Image();
   imageObj.crossOrigin = "Anonymous";
@@ -19,12 +19,15 @@ function loadID(src) {
     ctx.canvas.width = imageObj.width;
     ctx.canvas.height = imageObj.height;
     ctx.drawImage(this, 0, 0);
+    if(cb) {
+      cb();
+    }
   };
   imageObj.src = src;
 }
 
-function load_ID_default() {
-  loadID('idtemplate.png');
+function load_ID_default(cb) {
+  loadID('idtemplate.png', cb);
 }
 
 function getDate() {
@@ -58,7 +61,6 @@ function drawAllText(first_name, last_name, position, affiliation) {
   var idNumber = getRandomID();
   Globals.idNumber = idNumber;
   drawText("ID Number: " + idNumber, 500, 775, font);
-
 }
 
 function drawQR(string, x, y, size, finished) {
@@ -115,29 +117,34 @@ function drawImage(img_elem) {
 }
 
 function generateID(fn, ln, pos, aff, qr1, qr2) {
-  load_ID_default();
-  drawQR(qr1, 1105, 275, 350, function() {
-    drawQR(qr2, 1105, 650, 350, function() {
-      setTimeout(function() {
-        drawAllText(fn, ln, pos, aff);
-        var chosen_img = document.getElementById('chosen_img');
-        drawImage(chosen_img);
-        var canvas = document.getElementById('drawcanvas');
-        var dataURL = canvas.toDataURL('image/png');
-        var img = document.getElementById('img_id');
-        img.src = dataURL;
-        Globals.id_figure = dataURL;
-        show_div_id();
-        // store into DB
-        b2bDB.store_id(Globals.idNumber,
-                      Globals.key.getPublicKey(),
-                      Globals.key.getPrivateKey(),
-                      Globals.id_figure,
-                      Globals.id_index,
-                      Globals.phrases,
-                      Globals.video_data_uri);
-        });
-      }, 150);
+  load_ID_default(function() {
+    drawQR(qr1, 1105, 275, 350, function() {
+      drawQR(qr2, 1105, 650, 350, function() {
+        setTimeout(function() {
+          drawAllText(fn, ln, pos, aff);
+          setTimeout(function() {
+            var chosen_img = document.getElementById('chosen_img');
+            drawImage(chosen_img);
+            setTimeout(function() {
+              var canvas = document.getElementById('drawcanvas');
+              var dataURL = canvas.toDataURL('image/png');
+              var img = document.getElementById('img_id');
+              img.src = dataURL;
+              Globals.id_figure = dataURL;
+              show_div_id();
+              // store into DB
+              b2bDB.store_id(Globals.idNumber,
+                        Globals.key.getPublicKey(),
+                        Globals.key.getPrivateKey(),
+                        Globals.id_figure,
+                        Globals.id_index,
+                        Globals.phrases,
+                        Globals.video_data_uri);
+              }, 100);
+          }, 100);
+        }, 100);
+      });
+    });
   });
 //  setTimeout(function () {
 
