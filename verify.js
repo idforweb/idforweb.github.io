@@ -3,6 +3,27 @@ var VerifyGlobals = VerifyGlobals || {
   num_array : [],
 };
 
+function show_menu() {
+  var menu = document.getElementById('menu');
+  menu.style = '';
+}
+function hide_menu() {
+  var menu = document.getElementById('menu');
+  menu.style = 'display:none;';
+}
+function show_verify() {
+  var verify_video = document.getElementById('recording');
+  verify_video.style = '';
+  hide_menu();
+}
+function hide_verify() {
+  var verify_video = document.getElementById('recording');
+  verify_video.style = 'display:none;';
+  show_menu();
+}
+
+var phrasePlayer = phrasePlayer || undefined;
+
 function draw_id(id) {
   // create img element
   var p = document.getElementById('id_list');
@@ -13,6 +34,14 @@ function draw_id(id) {
   img.onclick = (function(idNumber) {
     return function() {
       console.log('I wanna verify ' + idNumber);
+      // do something
+      // create PhrasePlayer
+      phrasePlayer = new PhrasePlayer(id['phrases'], 'verify',
+                                      'phrase', 'record', id['time_index']);
+      var video = document.getElementById('record');
+      video.src = id['videoURL'];
+      // show verify
+      show_verify();
     }
   }(id['idNumber']));
   p.appendChild(img);
