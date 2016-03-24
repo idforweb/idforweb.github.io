@@ -47,23 +47,29 @@ function draw_id(id) {
     }
   })(id);
   p.appendChild(img);
-  var br = document.createElement('br');
   var button = document.createElement('button');
   button.addEventListener('click', function() {
     upload_to_s3_with_number(id['idNumber']);
   });
+
   if(id['uploaded']) {
     button.innerText = 'Click to upload (already uploaded, takes few seconds)';
   }
   else {
     button.innerText = 'Click to upload (not uploaded, takes few seconds)';
   }
+  var b = document.createElement('b');
+  b.innerText = 'ID: ' + id['idNumber'];
+  var br = document.createElement('br');
   var br2 = document.createElement('br');
   var br3 = document.createElement('br');
+  var br4 = document.createElement('br');
   p.appendChild(br);
-  p.appendChild(button);
+  p.appendChild(b);
   p.appendChild(br2);
+  p.appendChild(button);
   p.appendChild(br3);
+  p.appendChild(br4);
 }
 
 function loaded_all() {
