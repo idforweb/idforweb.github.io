@@ -49,6 +49,8 @@ function draw_id(id) {
   p.appendChild(img);
   var img2 = document.createElement('img');
   img2.src = 'indicator.gif';
+  img2.width = 24;
+  img2.height = 24;
   img2.style = 'display:none;';
   img2.id = 'img_' + id['idNumber'];
   var button = document.createElement('button');
