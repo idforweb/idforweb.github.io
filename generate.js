@@ -110,7 +110,7 @@ function do_generate_id() {
   // get img
 
   // to read and heading
-  var arr = Globals.phrases.splice(0);
+  var arr = Globals.phrases.slice(0);
   var heading = arr.shift();
   var qr1 = arr.join('~~~') + 'MMM' + heading;
   // time and videopath
