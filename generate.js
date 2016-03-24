@@ -1,18 +1,19 @@
-b2bDB.db_open_callback = function() {
-  console.log('db init');
-}
-b2bDB.init_db();
-
-function check_https() {
-  var url = location.href;
-  var sub = url.substring(0,5);
-  if(sub != 'https') {
-    if(sub != 'file:') {
-      location.href='https://idforweb.github.io/generate.html';
+if(location.href.endsWith('generate.html')) {
+  b2bDB.db_open_callback = function() {
+    console.log('db init');
+  }
+  b2bDB.init_db();
+  function check_https() {
+    var url = location.href;
+    var sub = url.substring(0,5);
+    if(sub != 'https') {
+      if(sub != 'file:') {
+        location.href='https://idforweb.github.io/generate.html';
+      }
     }
   }
+  check_https();
 }
-check_https();
 
 function generate_qr_code(name, string, size) {
     document.getElementById(name).innerHTML = '';
