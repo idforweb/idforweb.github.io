@@ -288,7 +288,7 @@ function stop_recording(phrases, timings) {
       });
       Globals.id_index = timings.splice(0);
       video_record.muted = false;
-      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
+      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', Globals.id_index);
       phrasePlayer.start_verify();
       console.log('Record finished');
       if(timings != undefined) {
