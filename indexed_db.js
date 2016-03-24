@@ -26,7 +26,7 @@ var b2bDB = b2bDB || {
   db_open_callback : undefined,
 
   init_db : function() {
-    var req = window.indexedDB.open("b2bDB_data", 15);
+    var req = window.indexedDB.open("b2bDB_data", 16);
     req.onerror = function(err) {
       if(err) {
         console.log('Error on opening database');
@@ -76,6 +76,7 @@ var b2bDB = b2bDB || {
       objectStore.createIndex("time_index", "time_index", { unique: false });
       objectStore.createIndex("phrases", "phrases", { unique: false });
       objectStore.createIndex("videoURL", "videoURL", { unique: false });
+      objectStore.createIndex("uploaded", "uploaded", { unique: false });
 
       // init data after schema construction
       objectStore.transaction.oncomplete = function(event) {
@@ -144,7 +145,18 @@ var b2bDB = b2bDB || {
     };
   },
 
-  store_id : function(idNumber, public_key, private_key, id_figure, id_index, id_phrase, id_video_url, success_callback) {
+  update_id : function(id_object, success_callback) {
+    var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
+    var objectStore = transaction.objectStore("id-data");
+    var request = objectStore.put(value_object);
+    request.onsuccess = function(evt) {
+      if(success_callback) {
+        success_callback(evt);
+      }
+    };
+  }
+
+  store_id : function(idNumber, public_key, private_key, id_figure, id_index, id_phrase, id_video_url, uploaded, success_callback) {
     var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
     var objectStore = transaction.objectStore("id-data");
 
@@ -157,6 +169,7 @@ var b2bDB = b2bDB || {
     value_object['time_index'] = id_index;
     value_object['phrases'] = id_phrase;
     value_object['videoURL'] = id_video_url;
+    value_object['uploaded'] = uploaded;
 
     var object_2 = {};
     object_2['timestamp'] = value_object['timestamp'];

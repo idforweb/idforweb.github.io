@@ -142,7 +142,8 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
                         Globals.id_figure,
                         Globals.id_index,
                         Globals.phrases,
-                        Globals.video_data_uri);
+                        Globals.video_data_uri,
+                        false);
               }, 100);
           }, 100);
         }, 100);

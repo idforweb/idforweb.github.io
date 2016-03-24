@@ -48,7 +48,20 @@ function draw_id(id) {
   })(id);
   p.appendChild(img);
   var br = document.createElement('br');
+  var button = document.createElement('button');
+  button.addEventListener('click', function() {
+    upload_to_s3_with_number(id['idNumber']);
+  });
+  if(id['uploaded']) {
+    button.innerText = 'Upload (already uploaded)';
+  }
+  else {
+    button.innerText = 'Upload (not uploaded)';
+  }
+  var br2 = document.createElement('br');
   p.appendChild(br);
+  p.appendChild(button);
+  p.appendChild(br2);
 }
 
 function loaded_all() {
