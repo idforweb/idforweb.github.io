@@ -145,9 +145,19 @@ var b2bDB = b2bDB || {
   },
 
   store_id : function(idNumber, public_key, private_key, id_figure, id_index, id_phrase, id_video_url, success_callback) {
-    var timestamp = Date.now();
     var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
     var objectStore = transaction.objectStore("id-data");
+
+    var value_object = {};
+    value_object['timestamp'] = Date.now();
+    value_object['idNumber'] = idNumber;
+    value_object['public_key'] = public_key;
+    value_object['private_key'] = public_key;
+    value_object['id_picture'] = id_figure;
+    value_object['time_index'] = id_index;
+    value_object['phrases'] = id_phrase;
+    value_object['videoURL'] = id_video_url;
+
     var request = objectStore.put(value_object);
     request.onsuccess = function(evt) {
       if(success_callback) {

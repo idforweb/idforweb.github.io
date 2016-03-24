@@ -118,24 +118,26 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
   load_ID_default();
   drawQR(qr1, 1105, 275, 350, function() {
     drawQR(qr2, 1105, 650, 350, function() {
-      drawAllText(fn, ln, pos, aff);
-      var chosen_img = document.getElementById('chosen_img');
-      drawImage(chosen_img);
-      var canvas = document.getElementById('drawcanvas');
-      var dataURL = canvas.toDataURL('image/png');
-      var img = document.getElementById('img_id');
-      img.src = dataURL;
-      Globals.id_figure = dataURL;
-      show_div_id();
-      // store into DB
-      b2bDB.store_id(Globals.idNumber,
-                    Globals.key.getPublicKey(),
-                    Globals.key.getPrivateKey(),
-                    Globals.id_figure,
-                    Globals.id_index,
-                    Globals.phrases,
-                    Globals.video_data_uri);
-    });
+      setTimeout(function() {
+        drawAllText(fn, ln, pos, aff);
+        var chosen_img = document.getElementById('chosen_img');
+        drawImage(chosen_img);
+        var canvas = document.getElementById('drawcanvas');
+        var dataURL = canvas.toDataURL('image/png');
+        var img = document.getElementById('img_id');
+        img.src = dataURL;
+        Globals.id_figure = dataURL;
+        show_div_id();
+        // store into DB
+        b2bDB.store_id(Globals.idNumber,
+                      Globals.key.getPublicKey(),
+                      Globals.key.getPrivateKey(),
+                      Globals.id_figure,
+                      Globals.id_index,
+                      Globals.phrases,
+                      Globals.video_data_uri);
+        });
+      }, 150);
   });
 //  setTimeout(function () {
 
