@@ -59,9 +59,11 @@ function draw_id(id) {
     button.innerText = 'Upload (not uploaded)';
   }
   var br2 = document.createElement('br');
+  var br3 = document.createElement('br');
   p.appendChild(br);
   p.appendChild(button);
   p.appendChild(br2);
+  p.appendChild(br3);
 }
 
 function loaded_all() {
