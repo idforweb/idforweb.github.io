@@ -349,10 +349,19 @@ function getThumbnail(videoDataURI, stamps) {
 }
 
 function getThumbnailAt(video_elem, canvas_elem, time, img) {
-  video_elem.currentTime = (time / 1000.0);
-  setTimeout(function() {
+  video_elem.ontimeupdate = function() {
     var ctx = canvas_elem.getContext('2d');
     ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
     img.src = canvas_elem.toDataURL("image/png");
+  }
+  video_elem.currentTime = (time / 1000.0);
+  /*
+  setTimeout(function() {
+
+    var ctx = canvas_elem.getContext('2d');
+    ctx.drawImage(video_elem, 0, 0, canvas_elem.width, canvas_elem.height);
+    img.src = canvas_elem.toDataURL("image/png");
+
   }, 300);
+  */
 }
