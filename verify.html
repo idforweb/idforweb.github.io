@@ -15,49 +15,29 @@
 }
 </style>
 <script>
-  function play_intro() {
-    location.href='https://idforweb.github.io/play.html';
-  }
 
-  function create_id() {
-    document.getElementById('video_frame').innerHTML =
-      '<p align="center"><iframe src="create.html" frameborder=0 border=0 width=80% height=70%></iframe></p>';
-  }
-  function verify_id() {
-  }
-  function do_survey() {
-    location.href='https://goo.gl/forms/xhxUZ5GhZp';
-  }
 </script>
 <body>
   <div id='menu'>
     <p align='center'>
-    <img src='idtemplate.png' width='50%'></img>
-    <br />
-    Click on ID to launch verify <br />
-    <script>
-      // get input like
-      /*
-        1 First name
-        2 Last name
-        3 Position
-        4 Affiliation
-           record video button
-        5. Canvas with thumbnail
-        6. Chosen thumbnail
-        7. Generate ID button
-      */
-    </script>
-    First name: <input type=text></input><br />
-    Last name: <input type=text></input><br />
-    Position: <input type=text></input><br />
-    Affiliation: <input type=text></input><br />
-    <button class='button button2' id='record' onclick='javascript:do_record();'>Record Selfie Video</button><br /><br />
-
-    <button class='button button2' id='generate' onclick='javascript:do_generate_id();'>Generate ID</button><br /><br />
+    <table>
+      <tr>
+        <td>
+          <p align='center' id='id_list'>
+          </p>
+        </td>
+      </tr>
+    </table>
     </p>
   </div>
   <div id='video_frame' frameborder=0 border=0></div>
 </body>
+<script src='indexed_db.js'></script>
+<script src='jsencrypt.js'></script>
+<script src='core.js'></script>
+<script src='sha256.js'></script>
+<script src='qrcode.js'></script>
+<script src='phrase.js'></script>
+<script src='generate.js'></script>
+<script src='drawcanvas.js'></script>
 </html>
-
