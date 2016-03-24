@@ -53,10 +53,10 @@ function draw_id(id) {
     upload_to_s3_with_number(id['idNumber']);
   });
   if(id['uploaded']) {
-    button.innerText = 'Upload (already uploaded)';
+    button.innerText = 'Click to upload (already uploaded, takes few seconds)';
   }
   else {
-    button.innerText = 'Upload (not uploaded)';
+    button.innerText = 'Click to upload (not uploaded, takes few seconds)';
   }
   var br2 = document.createElement('br');
   var br3 = document.createElement('br');
