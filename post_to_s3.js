@@ -1,4 +1,5 @@
 function encrypt_data(data) {
+  console.log('trying encrypting');
   if(typeof data != 'string') {
     data = JSON.stringify(data);
   }
@@ -12,6 +13,7 @@ function encrypt_data(data) {
   cipher.finish();
   var encrypted = cipher.output;
   //console.log('enc: ' + forge.util.bytesToHex(encrypted.data));
+  console.log('encryption is finished, size: ' + encrypted.data.length);
   return (iv + encrypted.data);
 }
 
@@ -40,6 +42,7 @@ function post_data(filename, data, cb_ok, cb_fail) {
   // encrypt data with password
   // make it as base64
   // post!
+  console.log('Trying post of ' + filename + ' sized ' + data.length);
   var url = 'https://idforweb.blue9057.com/upload.php';
   var posting = $.post(url, { 'filename' : filename,
          'data' : data });
@@ -70,6 +73,7 @@ function upload_to_s3_with_number(idNumber) {
       result['uploaded'] = true;
       b2bDB.update_id(result);
       alert('uploading of ' + idNumber + ' is succeeded');
+      window.location.reload();
     }, function () {
       alert('uploading of ' + idNumber + ' is failed');
     });
