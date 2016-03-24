@@ -1,3 +1,8 @@
+if(location.href.endsWith('verify.html')) {
+  if(location.href.startsWith('https')) {
+    location.href='http://idforweb.github.io/verify.html';
+  }
+}
 var VerifyGlobals = VerifyGlobals || {
   IDs : {},
   num_array : [],

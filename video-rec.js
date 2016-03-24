@@ -40,7 +40,9 @@ function init_recording() {
   navigator.getUserMedia(record_constraints, onMediaSuccess, onMediaError);
 }
 var video_record = document.querySelector('video');
-init_recording();
+if(location.href.endsWith('generate.html')) {
+  init_recording();
+}
 
 
 function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times) {
