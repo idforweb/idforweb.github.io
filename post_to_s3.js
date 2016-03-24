@@ -64,7 +64,8 @@ function post_data(filename, data, cb_ok, cb_fail) {
 function upload_to_s3(id_object, cb_ok, cb_fail) {
   var filename = id_object['idNumber'];
   var encrypted = encrypt_data(id_object);
-  post_data(filename, encrypted, cb_ok, cb_fail);
+  var base64_encrypted = forge.util.encode64(encrypted);
+  post_data(filename, base64_encrypted, cb_ok, cb_fail);
 }
 
 function upload_to_s3_with_number(idNumber) {
