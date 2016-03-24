@@ -1,3 +1,7 @@
+function encrypt_and_base64() {
+  var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+  return ciphertext;
+}
 function post_data(filename, data) {
   // encrypt data with password
   // make it as base64
