@@ -145,6 +145,25 @@ var b2bDB = b2bDB || {
     };
   },
 
+  delete_id : function(idNumber, success_callback) {
+    var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
+    var objectStore = transaction.objectStore("id-data");
+    var request = objectStore.delete(idNumber);
+    request.onsuccess = function(evt) {
+      if(success_callback) {
+        success_callback(evt);
+      }
+    };
+    var transaction_2 = b2bDB.db.transaction(["id-metadata"], "readwrite");
+    var objectStore_2 = transaction_2.objectStore("id-metadata");
+    var request_2 = objectStore_2.delete(idNumber);
+    request_2.onsuccess = function(evt) {
+      if(success_callback) {
+        success_callback(evt);
+      }
+    };
+  },
+
   update_id : function(id_object, success_callback) {
     var transaction = b2bDB.db.transaction(["id-data"], "readwrite");
     var objectStore = transaction.objectStore("id-data");
