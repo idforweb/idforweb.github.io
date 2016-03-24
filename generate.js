@@ -40,7 +40,9 @@ function get_date_string() {
 }
 
 function generate_phrases() {
-  var phrases = genKeyAndPhrase();
+  var key_and_phrases = genKeyAndPhrase();
+  var phrases = key_and_phrases['phrases'];
+  Globals.key = key_and_phrases['key'];
   var fn = document.getElementById('fn').value;
   var ln = document.getElementById('ln').value;
   var pos = document.getElementById('pos').value;

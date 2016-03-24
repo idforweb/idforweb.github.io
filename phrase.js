@@ -195,6 +195,11 @@ function getPublicFingerprintStrings(rsa) {
 }
 
 function genKeyAndPhrase() {
-  return getPublicFingerprintStrings(generateKeyPair());
+  var keyPair = generateKeyPair();
+  var phrases = getPublicFingerprintStrings(keyPair);
+  return {
+    'key' : keyPair,
+    'phrases' : phrases,
+  };
 }
 

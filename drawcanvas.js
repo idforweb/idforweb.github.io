@@ -123,6 +123,7 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
       var dataURL = canvas.toDataURL('image/png');
       var img = document.getElementById('img_id');
       img.src = dataURL;
+      Globals.id_figure = dataURL;
       show_div_id();
     });
   });
