@@ -10,6 +10,11 @@ function draw_id(id) {
   img.width = 400;
   img.height = 300;
   img.src = id['id_picture'];
+  img.onclick = (function(idNumber) {
+    return function() {
+      console.log('I wanna verify ' + idNumber);
+    }
+  }(id['idNumber']));
   p.appendChild(img);
 }
 
