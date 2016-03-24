@@ -16,6 +16,8 @@ function draw_id(id) {
     }
   }(id['idNumber']));
   p.appendChild(img);
+  var br = document.createElement('br');
+  p.appendChild(br);
 }
 
 function loaded_all() {
