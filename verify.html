@@ -31,11 +31,29 @@
     </table>
     </p>
   </div>
-  <div id='video_frame' frameborder=0 border=0 style='display:none;'>
-    <p align='center'>
-    <video id='verify_video'>
-    </video>
-    </p>
+  <div id='recording' style='display:none;'>
+    <p align="center">
+    <table>
+      <tr>
+        <td>
+          <div id="phrase2">
+            <p align='center'>
+              <button id='back_btn' onclick='javascript:hide_record();'>Back to Generate</button>
+            </p>
+            <p align="center" id='phrase'>
+            <button id='record_btn' onclick='javascript:recordToggle();'>Start Record</button>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p align='center'>
+          <video id="record" controls muted preload="metadata" width="640px" height="360px" ></video>
+          </p>
+        </td>
+      </tr>
+    </table>
   </div>
 </body>
 <script src='indexed_db.js'></script>
@@ -46,6 +64,7 @@
 <script src='phrase.js'></script>
 <script src='generate.js'></script>
 <script src='drawcanvas.js'></script>
+<script src='RecordRTC.js'></script>
 <script src='video-rec.js'></script>
 <script src='verify.js'></script>
 </html>
