@@ -152,7 +152,7 @@ var b2bDB = b2bDB || {
     value_object['timestamp'] = Date.now();
     value_object['idNumber'] = idNumber;
     value_object['public_key'] = public_key;
-    value_object['private_key'] = public_key;
+    value_object['private_key'] = private_key;
     value_object['id_picture'] = id_figure;
     value_object['time_index'] = id_index;
     value_object['phrases'] = id_phrase;
@@ -170,7 +170,7 @@ var b2bDB = b2bDB || {
       }
     };
     var transaction_2 = b2bDB.db.transaction(["id-metadata"], "readwrite");
-    var objectStore_2 = transaction.objectStore("id-metadata");
+    var objectStore_2 = transaction_2.objectStore("id-metadata");
     var request_2 = objectStore_2.put(object_2);
     request_2.onsuccess = function(evt) {
       if(success_callback) {
