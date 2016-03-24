@@ -47,7 +47,7 @@ function draw_id(id) {
     }
   })(id);
   p.appendChild(img);
-  var img2 = document.createElement('br');
+  var img2 = document.createElement('img');
   img2.src = 'indicator.gif';
   img2.style = 'display:none;';
   img2.id = 'img_' + id['idNumber'];
