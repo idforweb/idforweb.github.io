@@ -4,29 +4,29 @@ function encrypt_data(data) {
   }
   // get iv
   var iv = forge.random.getBytesSync(16);
-  console.log('iv: ' + forge.util.bytesToHex(iv));
+  //console.log('iv: ' + forge.util.bytesToHex(iv));
   var key = 'some_key_for_enc';
   var cipher = forge.cipher.createCipher('AES-OFB', key);
   cipher.start({iv: iv});
   cipher.update(forge.util.createBuffer(data));
   cipher.finish();
   var encrypted = cipher.output;
-  console.log('enc: ' + forge.util.bytesToHex(encrypted.data));
+  //console.log('enc: ' + forge.util.bytesToHex(encrypted.data));
   return (iv + encrypted.data);
 }
 
 function decrypt_data(data) {
   var iv = data.substring(0,16);
-  console.log('iv: ' + forge.util.bytesToHex(iv));
+  //console.log('iv: ' + forge.util.bytesToHex(iv));
   var real_data = data.substring(16);
-  console.log('enc: ' + forge.util.bytesToHex(real_data));
+  //console.log('enc: ' + forge.util.bytesToHex(real_data));
   var key = 'some_key_for_enc';
   var decipher = forge.cipher.createDecipher('AES-OFB', key);
   decipher.start({iv: iv});
   decipher.update(forge.util.createBuffer(real_data));
   decipher.finish();
   var decrypted = decipher.output;
-  console.dir(decrypted.data);
+  //console.dir(decrypted.data);
   try {
     return JSON.parse(decrypted.data);
   } catch(e) {
@@ -44,7 +44,7 @@ function post_data(filename, data, cb_ok, cb_fail) {
   var posting = $.post(url, { 'filename' : filename,
          'data' : data });
   posting.done(function(data) {
-    console.log(data);
+    console.log('Posted url: ' + data);
     if(data.startsWith('http')) {
       if(cb_ok) {
         cb_ok();
