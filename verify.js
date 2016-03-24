@@ -43,6 +43,7 @@ function draw_id(id) {
       video.src = ID['videoURL'];
       // show verify
       show_verify();
+      phrasePlayer.start_verify();
     }
   })(id);
   p.appendChild(img);

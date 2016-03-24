@@ -51,7 +51,7 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   }
   this.stamps = [];
   this.mode = mode;
-  if(mode == 'verify') {
+  if(mode == 'verify' || mode == 'verify2') {
     this.target_video_elem = target_video_elem;
     if(typeof target_video_elem == 'string') {
       this.target_video_elem = document.getElementById(target_video_elem);
@@ -89,13 +89,22 @@ PhrasePlayer.prototype.get_stamps = function() {
 
 PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
+  alert('ID is rejected!');
 };
 
 PhrasePlayer.prototype.accept_id = function() {
   console.log('ID accpeted');
-  getThumbnail(this.target_video_elem.src, this.get_stamps());
-  if(hide_record != undefined) {
-    hide_record();
+  if(this.mode == 'verify') {
+    getThumbnail(this.target_video_elem.src, this.get_stamps());
+    if(hide_record != undefined) {
+      hide_record();
+    }
+  }
+  if(this.mode == 'verify2') {
+    alert('ID is verified');
+    if(hide_verify != undefined) {
+      hide_verify();
+    }
   }
 };
 
