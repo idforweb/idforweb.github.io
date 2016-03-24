@@ -378,6 +378,15 @@ function RecordRTC(mediaStream, config) {
             return URL.createObjectURL(mediaRecorder.blob);
         },
 
+        toDataURI: function(cb) {
+            if (!mediaRecorder) {
+                return console.warn(WARNING);
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {cb(e.target.result);}
+            reader.readAsDataURL(blob);
+        },
+
         /**
          * This method saves blob/file into disk (by inovking save-as dialog). It takes single (optional) argument i.e. FileName
          * @method

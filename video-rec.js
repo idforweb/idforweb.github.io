@@ -283,7 +283,9 @@ function stop_recording(phrases, timings) {
       video_uri = rtcRecorder.toURL();
       video_record.src = video_uri;
       Globals.video_blob_uri = video_uri;
-      Globals.video_data_uri = window.URL.createObjectURL(video_uri);
+      rtcRecorder.toDataURI(function(url) {
+        Globals.video_data_uri = url;
+      });
       Globals.id_index = timings.splice(0);
       video_record.muted = false;
       phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
