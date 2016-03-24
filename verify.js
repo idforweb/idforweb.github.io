@@ -37,7 +37,7 @@ function draw_id(id) {
       console.log('I wanna verify ' + ID['idNumber']);
       // do something
       // create PhrasePlayer
-      phrasePlayer = new PhrasePlayer(ID['phrases'], 'verify',
+      phrasePlayer = new PhrasePlayer(ID['phrases'], 'verify2',
                                       'phrase', 'record', ID['time_index']);
       var video = document.getElementById('record');
       video.src = ID['videoURL'];
