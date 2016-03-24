@@ -26,7 +26,7 @@ var b2bDB = b2bDB || {
   db_open_callback : undefined,
 
   init_db : function() {
-    var req = window.indexedDB.open("b2bDB_data", 14);
+    var req = window.indexedDB.open("b2bDB_data", 15);
     req.onerror = function(err) {
       if(err) {
         console.log('Error on opening database');
