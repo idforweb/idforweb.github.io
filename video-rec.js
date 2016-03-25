@@ -178,6 +178,7 @@ PhrasePlayer.prototype.start_verify = function() {
     }, false);
     return button;
   }
+  /*
   function getPlayButton() {
     var button = document.createElement('button');
     button.innerText = 'Play';
@@ -186,15 +187,18 @@ PhrasePlayer.prototype.start_verify = function() {
     }, false);
     return button;
   }
+  */
+
   function getDoneButton() {
     var button = document.createElement('button');
-    button.innerText = 'Done';
+    button.innerText = 'Play';
     button.addEventListener('click',function() {
-      self.verify_next();
       self.play_current_phrase();
+      self.verify_next();
     }, false);
     return button;
   }
+
   function getRejectButton() {
     var button = document.createElement('button');
     button.innerText = 'Reject';
