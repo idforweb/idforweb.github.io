@@ -46,6 +46,7 @@ if(location.href.endsWith('generate.html')) {
 
 
 function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times) {
+  this.paused = false;
   this.timer = null;
   this.target_html_elem = target_html_elem;
   if(typeof target_html_elem == 'string') {
@@ -133,7 +134,9 @@ PhrasePlayer.prototype.play_current_phrase = function() {
   var self = this;
   setTimeout(function() {
     self.target_video_elem.pause();
-    self.verify_next();
+    if(this.paused == false) {
+      self.verify_next();
+    }
   }, next_position - start_position);
   // play!
   this.target_video_elem.play();
@@ -189,11 +192,23 @@ PhrasePlayer.prototype.start_verify = function() {
     return button;
   }
   */
+  function getPauseButton() {
+    var button = document.createElement('button');
+    button.innerText = 'Pause';
+    button.addEventListener('click',function() {
+      self.paused = true;
+      self.target_video_elem.pause();
+    }, false);
+    return button;
+  }
+
+
 
   function getDoneButton() {
     var button = document.createElement('button');
     button.innerText = 'Play';
     button.addEventListener('click',function() {
+      self.paused = false;
       self.play_current_phrase();
     }, false);
     return button;
