@@ -18,7 +18,6 @@
   function play_intro() {
     location.href='https://idforweb.github.io/play.html';
   }
-
   function create_id() {
     location.href='https://idforweb.github.io/generate.html';
   }
@@ -32,6 +31,7 @@
 <body>
   <div id='menu'>
     <p align='center'>
+    A session for <b id='gtid'></b><br />
     <button class='button button2' id='intro' onclick='javascript:play_intro();'>Play Introductory Video</button><br /><br />
     <button class='button button2' id='create' onclick='javascript:create_id();'>Create IDForWeb</button><br /><br />
     <button class='button button2' id='verify' onclick='javascript:verify_id();'>Verify IDForWeb</button><br /><br />
@@ -40,5 +40,16 @@
   </div>
   <div id='video_frame' frameborder=0 border=0></div>
 </body>
+<script>
+  function load_gtid() {
+    var id = document.getElementById('gtid');
+    var gtid = localStorage['gtid']
+    if(gtid == undefined) {
+      //location.href = 'settings.html';
+    }
+    id.innerText = gtid;
+  }
+  load_gtid();
+</script>
 </html>
 
