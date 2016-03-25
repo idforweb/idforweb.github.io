@@ -133,6 +133,7 @@ PhrasePlayer.prototype.play_current_phrase = function() {
   var self = this;
   setTimeout(function() {
     self.target_video_elem.pause();
+    self.verify_next();
   }, next_position - start_position);
   // play!
   this.target_video_elem.play();
@@ -194,7 +195,6 @@ PhrasePlayer.prototype.start_verify = function() {
     button.innerText = 'Play';
     button.addEventListener('click',function() {
       self.play_current_phrase();
-      self.verify_next();
     }, false);
     return button;
   }
