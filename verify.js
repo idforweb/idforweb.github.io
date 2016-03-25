@@ -22,6 +22,34 @@ function hide_verify() {
   show_menu();
 }
 
+function upload_all() {
+  // get ids.
+  var i;
+  var upload_list = [];
+  for(i=0; i<VerifyGlobals.num_array.length; ++i) {
+    var idNumber = VerifyGlobals.num_array[i]['idNumber'];
+    var ID = VerifyGlobals.IDs[idNumber];
+    if(ID['uploaded'] != true) {
+      upload_list.push(ID);
+    }
+  }
+  var cnt = 0;
+  upload_list.forEach(function(id_object) {
+    cnt += 1;
+    upload_to_s3(id_object, function() {
+      id_object['uploaded'] = true;
+      b2bDB.update_id(id_object);
+      if(cnt == upload_list.length) {
+        alert('Upload all finished');
+        window.location.reload();
+      }
+    },
+    function() {
+      alert('Failed to upload ' + id_object.idNumber);
+    });
+  });
+}
+
 var phrasePlayer = phrasePlayer || undefined;
 
 function draw_id(id) {
@@ -60,7 +88,7 @@ function draw_id(id) {
     img2.style = '';
   });
 
-  if(id['uploaded']) {
+  if(id['uploaded'] == true) {
     button.innerText = 'Click to upload (already uploaded)';
   }
   else {
