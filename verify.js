@@ -3,6 +3,10 @@ var VerifyGlobals = VerifyGlobals || {
   num_array : [],
 };
 
+function survey() {
+  location.href='https://goo.gl/forms/xhxUZ5GhZp';
+}
+
 function show_menu() {
   var menu = document.getElementById('menu');
   menu.style = '';
