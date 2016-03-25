@@ -228,7 +228,7 @@ PhrasePlayer.prototype.start_verify = function() {
 
   this.target_html_elem.innerText = header + current_phrase + "\n";
   this.target_html_elem.appendChild(getBackButton());
-  this.target_html_elem.appendChild(getPlayButton());
+  //this.target_html_elem.appendChild(getPlayButton());
   if(is_the_last) {
     this.target_html_elem.appendChild(getAcceptButton());
   }
