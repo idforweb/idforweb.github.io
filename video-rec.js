@@ -136,6 +136,7 @@ PhrasePlayer.prototype.play_current_phrase = function() {
     self.target_video_elem.pause();
     if(this.paused == false) {
       self.verify_next();
+      self.play_current_phrase();
     }
   }, next_position - start_position);
   // play!
@@ -192,6 +193,7 @@ PhrasePlayer.prototype.start_verify = function() {
     return button;
   }
   */
+
   function getPauseButton() {
     var button = document.createElement('button');
     button.innerText = 'Pause';
@@ -244,6 +246,7 @@ PhrasePlayer.prototype.start_verify = function() {
   this.target_html_elem.innerText = header + current_phrase + "\n";
   this.target_html_elem.appendChild(getBackButton());
   //this.target_html_elem.appendChild(getPlayButton());
+  this.target_html_elem.appendChild(getPauseButton());
   if(is_the_last) {
     this.target_html_elem.appendChild(getAcceptButton());
   }
