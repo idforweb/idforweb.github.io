@@ -135,8 +135,13 @@ PhrasePlayer.prototype.play_current_phrase = function() {
   setTimeout(function() {
     self.target_video_elem.pause();
     if(self.paused == false) {
-      self.verify_next();
-      self.play_current_phrase();
+      var is_the_last = self.current_position == (self.phrases.length - 1);
+      if(is_the_last) {
+      }
+      else {
+        self.verify_next();
+        self.play_current_phrase();
+      }
     }
   }, next_position - start_position);
   // play!
@@ -169,6 +174,7 @@ PhrasePlayer.prototype.start_verify = function() {
     Button 2: Next - move to next phrase
     Button 3: Reject - reject current video
   */
+
   this.set_video_position();
   var self = this;
   function getBackButton() {
