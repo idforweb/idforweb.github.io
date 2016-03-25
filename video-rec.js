@@ -92,11 +92,16 @@ PhrasePlayer.prototype.get_stamps = function() {
 PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
   alert('ID is rejected!');
-  if(hide_verify != undefined) {
-    hide_verify();
+  if(this.mode == 'verify2') {
+    if(hide_verify != undefined) {
+      hide_verify();
+    }
+    // move to survey
+    location.href='https://goo.gl/forms/xhxUZ5GhZp';
   }
-  // move to survey
-  location.href='https://goo.gl/forms/xhxUZ5GhZp';
+  else {
+    hide_record();
+  }
 };
 
 PhrasePlayer.prototype.accept_id = function() {

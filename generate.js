@@ -73,10 +73,6 @@ function hide_record() {
   show_main();
 }
 
-if(hide_verify == undefined) {
-  hide_verify = hide_record;
-}
-
 function show_div_id() {
   document.getElementById('div_showing_id').style = '';
   hide_main();
