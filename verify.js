@@ -39,10 +39,10 @@ function upload_all() {
   }
   var cnt = 0;
   upload_list.forEach(function(id_object) {
-    cnt += 1;
     upload_to_s3(id_object, function() {
       id_object['uploaded'] = true;
       b2bDB.update_id(id_object);
+      cnt += 1;
       if(cnt == upload_list.length) {
         alert('Upload all finished');
         window.location.reload();
