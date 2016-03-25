@@ -68,10 +68,13 @@ function show_record() {
   console.dir(all_phrases);
   phrasePlayer = new PhrasePlayer(all_phrases, 'record', 'phrase');
 }
-
 function hide_record() {
   document.getElementById('recording').style = 'display:none;';
   show_main();
+}
+
+if(hide_verify == undefined) {
+  hide_verify = hide_record;
 }
 
 function show_div_id() {
