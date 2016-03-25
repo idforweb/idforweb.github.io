@@ -134,7 +134,7 @@ PhrasePlayer.prototype.play_current_phrase = function() {
   var self = this;
   setTimeout(function() {
     self.target_video_elem.pause();
-    if(this.paused == false) {
+    if(self.paused == false) {
       self.verify_next();
       self.play_current_phrase();
     }
