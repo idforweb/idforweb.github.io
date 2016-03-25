@@ -41,14 +41,19 @@ function getDate() {
 }
 
 function getRandomID() {
-  var int_id = (Math.random() * 100000000) | 0;
+
+  var int_id = (Math.random() * 1000) | 0;
   var str_id = '' + int_id;
 
-  var add = (9 - str_id.length);
+  var add = (3 - str_id.length);
   for(var i=0; i<add; ++i) {
     str_id = '0' + str_id;
   }
-  return str_id;
+  var gtid = localStorage['gtid'];
+  if(gtid == undefined) {
+    location.href='settings.html';
+  }
+  return gtid.substring(3) + str_id;
 }
 
 function drawAllText(first_name, last_name, position, affiliation) {
