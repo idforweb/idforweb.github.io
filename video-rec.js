@@ -70,7 +70,7 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   this.phrases = phrases;
   this.current_position = 0;
   this.is_started = false;
-  this.capture_cb = false;
+  this.capture_cb = function() {};
 }
 
 PhrasePlayer.prototype.start_timer = function() {
