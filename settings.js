@@ -12,7 +12,6 @@ function check_gtid() {
     display_id.innerText = 'Your GTID is ' + gtid;
   }
 }
-check_gtid();
 
 function update_gtid() {
   var input = document.getElementById('gtid_input');
