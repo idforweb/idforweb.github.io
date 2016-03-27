@@ -17,6 +17,10 @@ var VerifyGlobals = VerifyGlobals || {
 function survey() {
   location.href='https://goo.gl/forms/xhxUZ5GhZp';
 }
+function menu() {
+  location.href='stage2.html';
+}
+
 
 function show_menu() {
   var menu = document.getElementById('menu');
