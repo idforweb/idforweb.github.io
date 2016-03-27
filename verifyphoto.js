@@ -64,6 +64,7 @@ function clearphoto() {
 }
 function takepicture() {
   var context = PHOTO.canvas.getContext('2d');
+  clearphoto();
   if (PHOTO.width && PHOTO.height) {
     PHOTO.canvas.width = PHOTO.width;
     PHOTO.canvas.height = PHOTO.height;
