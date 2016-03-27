@@ -133,7 +133,7 @@ function draw_id(id) {
   button2.innerText = 'Delete ID';
 
   var b2 = document.createElement('b');
-  p2.innerText = " Uploaded? ";
+  b2.innerText = " Uploaded? ";
   var b3 = document.createElement('b');
   if(id['uploaded'] == true) {
     b3.innerHTML = "<font color='green'>O</font>";
