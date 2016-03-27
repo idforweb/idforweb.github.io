@@ -1,6 +1,17 @@
 var VerifyGlobals = VerifyGlobals || {
   IDs : {},
   num_array : [],
+  get_session_number : function() {
+    VerifyGlobals.sessionNumber = localStorage['verify_session_number']|0;
+    localStorage['verify_session_number'] = '' + VerifyGlobals.sessionNumber;
+    return VerifyGlobals.sessionNumber;
+  },
+  increment_session_number : function() {
+    VerifyGlobals.sessionNumber = localStorage['verify_session_number']|0;
+    VerifyGlobals.sessionNumber += 1;
+    localStorage['verify_session_number'] = '' + VerifyGlobals.sessionNumber;
+  },
+  photo_count : 0,
 };
 
 function survey() {
@@ -78,9 +89,14 @@ function draw_id(id) {
       phrasePlayer.capture_cb = function() {
         console.log('captured!');
         takepicture(function() {
+          var fn = get_gtid() + '_' + VerifyGlobals.get_session_number() + '' +
+            VerifyGlobals.photo_count;
+          VerifyGlobals.photo_count += 1;
+          console.log('fn : ' + fn);
           console.log(PHOTO.photo.src.length);
         })
       };
+      VerifyGlobals.increment_session_number();
       phrasePlayer.start_verify();
     }
   })(id);
