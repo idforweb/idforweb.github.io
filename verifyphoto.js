@@ -45,7 +45,7 @@ function photo_startup() {
       var vendorURL = window.URL || window.webkitURL;
       PHOTO.video.src = vendorURL.createObjectURL(stream);
     }
-    PHOTOvideo.play();
+    PHOTO.video.play();
   },
   function(err) {
     console.log("An error occured! " + err);
