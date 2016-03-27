@@ -7,12 +7,12 @@ function photo_startup() {
   PHOTO.photo = document.getElementById('photo');
   PHOTO.startbutton = document.getElementById('startbutton');
 
-  PHOTO.navigator.getMedia = ( navigator.getUserMedia ||
+  navigator.getMedia = ( navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia ||
                         navigator.msGetUserMedia);
 
-  PHOTO.navigator.getMedia({
+  navigator.getMedia({
     video: true,
     audio: false
   },
