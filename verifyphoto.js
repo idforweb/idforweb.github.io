@@ -7,8 +7,8 @@ function photo_startup() {
   PHOTO.photo = document.getElementById('stillshotphoto');
   PHOTO.startbutton = document.getElementById('startbutton');
   PHOTO.streaming = false;
-  PHOTO.width = 320;
-  PHOTO.height = 240;
+  PHOTO.width = 640;
+  PHOTO.height = 480;
   // setup video
   PHOTO.video.addEventListener('canplay', function(ev){
 
