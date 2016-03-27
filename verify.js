@@ -89,7 +89,8 @@ function draw_id(id) {
       phrasePlayer.capture_cb = function() {
         console.log('captured!');
         takepicture(function() {
-          var fn = get_gtid() + '_' + VerifyGlobals.get_session_number() + '_' +
+          var fn = get_gtid() + '_' + ID['idNumber'] + "_" +
+            VerifyGlobals.get_session_number() + '_' +
             VerifyGlobals.photo_count + '.jpg.b64';
           VerifyGlobals.photo_count += 1;
           console.log('fn : ' + fn);
