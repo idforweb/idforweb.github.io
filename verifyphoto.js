@@ -7,6 +7,28 @@ function photo_startup() {
   PHOTO.photo = document.getElementById('photo');
   PHOTO.startbutton = document.getElementById('startbutton');
 
+  // setup video
+  PHOTO.video.addEventListener('canplay', function(ev){
+    /*
+    if (!PHOTO.streaming) {
+      PHOTO.height = PHOTO.video.videoHeight / (PHOTO.video.videoWidth/PHOTO.width);
+
+      // Firefox currently has a bug where the height can't be read from
+      // the video, so we will make assumptions if this happens.
+
+      if (isNaN(PHOTO.height)) {
+        PHOTO.height = PHOTO.width / (4/3);
+      }
+
+      PHOTO.video.setAttribute('width', PHOTO.width);
+      PHOTO.video.setAttribute('height', PHOTO.height);
+      PHOTO.canvas.setAttribute('width', PHOTO.width);
+      PHOTO.canvas.setAttribute('height', PHOTO.height);
+      PHOTO.streaming = true;
+    }
+    */
+  }, false);
+
   navigator.getMedia = ( navigator.getUserMedia ||
                         navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia ||
