@@ -2,9 +2,9 @@ var PHOTO = PHOTO || {
 };
 
 function photo_startup() {
-  PHOTO.video = document.getElementById('video');
-  PHOTO.canvas = document.getElementById('canvas');
-  PHOTO.photo = document.getElementById('photo');
+  PHOTO.video = document.getElementById('stillshotvideo');
+  PHOTO.canvas = document.getElementById('stillshotcanvas');
+  PHOTO.photo = document.getElementById('stillshotphoto');
   PHOTO.startbutton = document.getElementById('startbutton');
 
   // setup video
