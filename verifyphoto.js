@@ -72,7 +72,7 @@ function takepicture(cb) {
     PHOTO.canvas.height = PHOTO.height;
     context.drawImage(PHOTO.video, 0, 0, PHOTO.width, PHOTO.height);
 
-    var data = PHOTO.canvas.toDataURL('image/png');
+    var data = PHOTO.canvas.toDataURL('image/jpeg');
     if(cb) {
       PHOTO.photo.onload = cb;
     }
