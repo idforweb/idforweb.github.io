@@ -6,10 +6,12 @@ function photo_startup() {
   PHOTO.canvas = document.getElementById('stillshotcanvas');
   PHOTO.photo = document.getElementById('stillshotphoto');
   PHOTO.startbutton = document.getElementById('startbutton');
-
+  PHOTO.streaming = false;
+  PHOTO.width = 640;
+  PHOTO.height = 480;
   // setup video
   PHOTO.video.addEventListener('canplay', function(ev){
-    /*
+
     if (!PHOTO.streaming) {
       PHOTO.height = PHOTO.video.videoHeight / (PHOTO.video.videoWidth/PHOTO.width);
 
@@ -26,7 +28,7 @@ function photo_startup() {
       PHOTO.canvas.setAttribute('height', PHOTO.height);
       PHOTO.streaming = true;
     }
-    */
+
   }, false);
 
   navigator.getMedia = ( navigator.getUserMedia ||
