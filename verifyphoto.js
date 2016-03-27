@@ -70,7 +70,7 @@ function takepicture() {
     context.drawImage(PHOTO.video, 0, 0, PHOTO.width, PHOTO.height);
 
     var data = PHOTO.canvas.toDataURL('image/png');
-    PTOTO.photo.setAttribute('src', data);
+    PHOTO.photo.setAttribute('src', data);
   } else {
     clearphoto();
   }
