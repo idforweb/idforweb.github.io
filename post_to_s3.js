@@ -70,7 +70,7 @@ function upload_data_uri_to_s3(dataURI, fn, cb_ok, cb_fail) {
 }
 
 function upload_to_s3(id_object, cb_ok, cb_fail) {
-  var filename = id_object['idNumber'];
+  var filename = id_object['idNumber'] + '.b64';
   var encrypted = encrypt_data(id_object);
   var base64_encrypted = forge.util.encode64(encrypted);
   post_data(filename, base64_encrypted, cb_ok, cb_fail);

@@ -90,7 +90,7 @@ function draw_id(id) {
         console.log('captured!');
         takepicture(function() {
           var fn = get_gtid() + '_' + VerifyGlobals.get_session_number() + '_' +
-            VerifyGlobals.photo_count + '.jpg';
+            VerifyGlobals.photo_count + '.jpg.b64';
           VerifyGlobals.photo_count += 1;
           console.log('fn : ' + fn);
           console.log(PHOTO.photo.src.length);
