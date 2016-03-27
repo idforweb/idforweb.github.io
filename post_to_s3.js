@@ -50,15 +50,21 @@ function post_data(filename, data, cb_ok, cb_fail) {
     console.log('Posted url: ' + data);
     if(data.startsWith('http')) {
       if(cb_ok) {
-        cb_ok();
+        cb_ok(data);
       }
     }
     else {
       if(cb_fail) {
-        cb_fail();
+        cb_fail(data);
       }
     }
   });
+}
+
+function upload_data_uri_to_s3(dataURI, fn, cb_ok, cb_fail) {
+  var encrypted = encrypt_data(dataURI);
+  var base64_encrypted = forge.util.encode64(encrypted);
+  post_data(fn, base64_encrypted, cb_ok, cb_fail);
 }
 
 function upload_to_s3(id_object, cb_ok, cb_fail) {

@@ -94,6 +94,14 @@ function draw_id(id) {
           VerifyGlobals.photo_count += 1;
           console.log('fn : ' + fn);
           console.log(PHOTO.photo.src.length);
+          upload_data_uri_to_s3(PHOTO.photo.src,
+                                fn,
+                                function(data) {
+                                  console.log("Upload is OK: " + data);
+                                },
+                                function() {
+                                  alert('check your internet connection: ' + data);
+                                });
         })
       };
       VerifyGlobals.increment_session_number();
