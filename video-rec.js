@@ -103,6 +103,7 @@ PhrasePlayer.prototype.reject_id = function() {
   }
   else {
     hide_record();
+    location.href='generate.html';
   }
 };
 
