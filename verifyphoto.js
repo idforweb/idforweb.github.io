@@ -54,6 +54,7 @@ function photo_startup() {
   });
 }
 
+/*
 function clearphoto() {
   var context = PHOTO.canvas.getContext('2d');
   context.fillStyle = "#AAA";
@@ -62,18 +63,25 @@ function clearphoto() {
   var data = PHOTO.canvas.toDataURL('image/png');
   PHOTO.photo.setAttribute('src', data);
 }
-function takepicture() {
+*/
+function takepicture(cb) {
   var context = PHOTO.canvas.getContext('2d');
-  clearphoto();
+  //clearphoto();
   if (PHOTO.width && PHOTO.height) {
     PHOTO.canvas.width = PHOTO.width;
     PHOTO.canvas.height = PHOTO.height;
     context.drawImage(PHOTO.video, 0, 0, PHOTO.width, PHOTO.height);
 
     var data = PHOTO.canvas.toDataURL('image/png');
+    if(cb) {
+      PHOTO.photo.onload = cb;
+    }
+    else {
+      PHOTO.photo.onload = function() {};
+    }
     PHOTO.photo.setAttribute('src', data);
   } else {
-    clearphoto();
+    //clearphoto();
   }
 }
 
