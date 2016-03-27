@@ -54,4 +54,26 @@ function photo_startup() {
   });
 }
 
+function clearphoto() {
+  var context = PHOTO.canvas.getContext('2d');
+  context.fillStyle = "#AAA";
+  context.fillRect(0, 0, PHOTO.canvas.width, PHOTO.canvas.height);
+
+  var data = PHOTO.canvas.toDataURL('image/png');
+  PHOTO.photo.setAttribute('src', data);
+}
+function takepicture() {
+  var context = PHOTO.canvas.getContext('2d');
+  if (PHOTO.width && PHOTO.height) {
+    PHOTO.canvas.width = PHOTO.width;
+    PHOTO.canvas.height = PHOTO.height;
+    context.drawImage(PHOTO.video, 0, 0, PHOTO.width, PHOTO.height);
+
+    var data = PHOTO.canvas.toDataURL('image/png');
+    PTOTO.photo.setAttribute('src', data);
+  } else {
+    clearphoto();
+  }
+}
+
 photo_startup();
