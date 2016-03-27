@@ -132,14 +132,14 @@ function draw_id(id) {
   });
   button2.innerText = 'Delete ID';
 
-  var p2 = document.createElement('p');
+  var b2 = document.createElement('b');
   p2.innerText = " Uploaded? ";
-  var p3 = document.createElement('p');
+  var b3 = document.createElement('b');
   if(id['uploaded'] == true) {
-    p3.innerHTML = "<font color='green'>O</font>";
+    b3.innerHTML = "<font color='green'>O</font>";
   }
   else {
-    p3.innerHTML = "<font color='red'>X</font>";
+    b3.innerHTML = "<font color='red'>X</font>";
   }
 
 
@@ -154,8 +154,8 @@ function draw_id(id) {
   p.appendChild(br2);
   p.appendChild(button);
   p.appendChild(button2);
-  p.appendChild(p2);
-  p.appendChild(p3);
+  p.appendChild(b2);
+  p.appendChild(b3);
   p.appendChild(img2);
   p.appendChild(br3);
   p.appendChild(br4);
