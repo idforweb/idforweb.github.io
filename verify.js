@@ -75,6 +75,12 @@ function draw_id(id) {
       video.src = ID['videoURL'];
       // show verify
       show_verify();
+      phrasePlayer.capture_cb = function() {
+        console.log('captured!');
+        takepicture(function() {
+          console.log(PHOTO.photo.src.length);
+        })
+      };
       phrasePlayer.start_verify();
     }
   })(id);
