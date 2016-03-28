@@ -74,8 +74,8 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
       var t2 = this.phrases[2];
       var t3 = this.phrases[3];
       this.phrases[1] = t3 + ".";
-      this.phrases[2] = t2 + ".";
-      this.phrases[3] = t1 + ".";
+      this.phrases[2] = t1 + ".";
+      this.phrases[3] = t2 + ".";
     }
   }
   this.current_position = 0;
