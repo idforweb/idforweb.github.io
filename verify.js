@@ -78,6 +78,7 @@ function draw_id(id) {
   img.width = 400;
   img.height = 300;
   img.src = id['id_picture'];
+  img.class = 'id_img';
   img.onclick = (function(ID) {
     return function() {
       console.dir(ID);
@@ -178,8 +179,9 @@ function loaded_all() {
     })(ID);
   }
   if(location.hash == '#verifyprevious' && VerifyGlobals.num_array.length > 1) {
-    if(id_list.firstElementChild != null) {
-      id_list.firstElementChild.click();
+    var id_list = document.getElementsByClassName('id_img');
+    if(id_list.length > 1) {
+      id_list[1].click();
     }
   }
 }
