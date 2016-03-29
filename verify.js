@@ -71,14 +71,16 @@ function upload_all() {
 
 var phrasePlayer = phrasePlayer || undefined;
 
-function draw_id(id) {
+function draw_id(id, idx) {
   // create img element
   var p = document.getElementById('id_list');
   var img = document.createElement('img');
   img.width = 400;
   img.height = 300;
   img.src = id['id_picture'];
-  img.class = 'id_img';
+  if(idx == 1) {
+    img.id = 'previous_id';
+  }
   img.onclick = (function(ID) {
     return function() {
       console.dir(ID);
@@ -174,14 +176,14 @@ function loaded_all() {
     var idNumber = VerifyGlobals.num_array[i]['idNumber'];
     var ID = VerifyGlobals.IDs[idNumber];
     // draw at here!
-    (function(id) {
-      draw_id(id);
-    })(ID);
+    (function(id, idx) {
+      draw_id(id, idx);
+    })(ID, i);
   }
   if(location.hash == '#verifyprevious' && VerifyGlobals.num_array.length > 1) {
-    var id_list = document.getElementsByClassName('id_img');
-    if(id_list.length > 1) {
-      id_list[1].click();
+    var pre_id = document.getElementById('previous_id');
+    if(pre_id != undefined) {
+      pre_id.click();
     }
   }
 }
