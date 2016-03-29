@@ -109,6 +109,7 @@ PhrasePlayer.prototype.reject_id = function() {
       hide_verify();
     }
     // move to survey
+    location.hash = '';
     location.href='https://goo.gl/forms/xhxUZ5GhZp';
   }
   else {
