@@ -138,6 +138,7 @@ PhrasePlayer.prototype.accept_id = function() {
     if(hide_verify != undefined) {
       hide_verify();
     }
+    location.hash = '';
     location.href='https://goo.gl/forms/xhxUZ5GhZp';
   }
 };
