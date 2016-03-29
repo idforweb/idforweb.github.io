@@ -358,7 +358,9 @@ function stop_recording(phrases, timings) {
       //phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
       //phrasePlayer.start_verify();
       getThumbnail(video_uri, timings);
-
+      if(hide_record != undefined) {
+        hide_record();
+      }
       console.log('Record finished');
       if(timings != undefined) {
         Globals.indexes = timings;
