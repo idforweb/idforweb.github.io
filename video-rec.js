@@ -120,10 +120,12 @@ PhrasePlayer.prototype.reject_id = function() {
 PhrasePlayer.prototype.accept_id = function() {
   console.log('ID accpeted');
   if(this.mode == 'verify') {
+    /*
     getThumbnail(this.target_video_elem.src, this.get_stamps());
     if(hide_record != undefined) {
       hide_record();
     }
+    */
   }
   if(this.mode == 'verify2') {
     alert('ID is verified');
@@ -353,8 +355,10 @@ function stop_recording(phrases, timings) {
       });
       Globals.id_index = timings.slice(0);
       video_record.muted = false;
-      phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
-      phrasePlayer.start_verify();
+      //phrasePlayer = new PhrasePlayer(phrases, 'verify', 'phrase', 'record', timings);
+      //phrasePlayer.start_verify();
+      getThumbnail(video_uri, timings);
+
       console.log('Record finished');
       if(timings != undefined) {
         Globals.indexes = timings;
