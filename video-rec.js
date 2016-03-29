@@ -70,9 +70,14 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   this.phrases = phrases.slice(0);
   if(this.mode == 'verify2') {
     if( ((Math.random() * 2)|0) == 1 ) {
+      /*
       var t1 = this.phrases[1];
       var t2 = this.phrases[2];
       var t3 = this.phrases[3];
+      */
+      var t1 = Phrase.stuffs[(Math.random() * 1024)|0];
+      var t2 = Phrase.stuffs[(Math.random() * 1024)|0];
+      var t3 = Phrase.stuffs[(Math.random() * 1024)|0];
       this.phrases[1] = t3 + ".";
       this.phrases[2] = t1 + ".";
       this.phrases[3] = t2 + ".";
