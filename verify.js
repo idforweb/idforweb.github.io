@@ -177,9 +177,14 @@ function loaded_all() {
       draw_id(id);
     })(ID);
   }
+  if(location.hash == '#verifyprevious') {
+    if(id_list.firstElementChild != null) {
+      id_list.firstElementChild.click();
+    }
+  }
 }
 
-if(location.href.endsWith('verify.html')) {
+if(location.href.split('#')[0].endsWith('verify.html')) {
   b2bDB.db_open_callback = function() {
       console.log('db init');
       // load IDs

@@ -136,7 +136,7 @@ function generateID(fn, ln, pos, aff, qr1, qr2) {
               var img = document.getElementById('img_id');
               img.src = dataURL;
               img.addEventListener('click', function() {
-                location.href='verify.html';
+                location.href='verify.html#verifyprevious';
               });
               Globals.id_figure = dataURL;
               show_div_id();
