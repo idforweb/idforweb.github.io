@@ -177,7 +177,7 @@ function loaded_all() {
       draw_id(id);
     })(ID);
   }
-  if(location.hash == '#verifyprevious') {
+  if(location.hash == '#verifyprevious' && VerifyGlobals.num_array.length > 1) {
     if(id_list.firstElementChild != null) {
       id_list.firstElementChild.click();
     }
