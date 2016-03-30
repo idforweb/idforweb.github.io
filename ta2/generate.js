@@ -73,6 +73,10 @@ function hide_record() {
   show_main();
 }
 
+function back_to_generate() {
+  location.reload(true);
+}
+
 function show_instructions() {
   document.getElementById('instructions').style = '';
 }
