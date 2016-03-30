@@ -1,0 +1,152 @@
+
+<html>
+<body>
+<p align='center'>
+<div>
+<video width='640px' height='480px' id='video' class='video' autoplay></video>
+<div id="webcamcontrols">
+    <button class="recordbutton" onclick="startRecording();">RECORD</button>
+    <button class="stopbutton" onclick="stopRecording();">Stop Record</button>
+</div>
+</div>
+</p>
+
+</body>
+
+<script language="javascript" type="text/javascript">
+function onVideoFail(e) {
+    console.log('webcam fail!', e);
+  };
+
+function hasGetUserMedia() {
+  // Note: Opera is unprefixed.
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
+if (hasGetUserMedia()) {
+  // Good to go!
+} else {
+  alert('getUserMedia() is not supported in your browser');
+}
+
+window.URL = window.URL || window.webkitURL;
+navigator.getUserMedia  = navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                           navigator.msGetUserMedia;
+
+var video = document.querySelector('video');
+var streamRecorder;
+var webcamstream;
+var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 1280,
+      minHeight: 720
+    }
+  },
+  audio : true,
+};
+
+var vgaConstraints = {
+  video: {
+    mandatory: {
+      maxWidth: 640,
+      maxHeight: 360
+    }
+  },
+  audio : true,
+};
+
+
+var mediaRecorder;
+function showVideo() {
+  if (navigator.getUserMedia) {
+    /*
+    navigator.getUserMedia(hdConstraints, function(stream) {
+      if(video == null) {
+        video = document.querySelector('video');
+      }
+      video.src = window.URL.createObjectURL(stream);
+      webcamstream = stream;
+  //  streamrecorder = webcamstream.record();
+    }, onVideoFail);
+    */
+
+  navigator.getUserMedia(hdConstraints, onMediaSuccess, onMediaError);
+
+  function onMediaSuccess(stream) {
+      mediaRecorder = new MediaStreamRecorder(stream);
+      mediaRecorder.mimeType = 'video/webm';
+      mediaRecorder.ondataavailable = function (blob) {
+          // POST/PUT "Blob" using FormData/XHR2
+          var blobURL = URL.createObjectURL(blob);
+          //document.write('' + blobURL + '');
+          if(video == null) {
+            video = document.querySelector('video');
+          }
+          video.src = window.URL.createObjectURL(stream);
+      };
+      //mediaRecorder.start(3000);
+  }
+
+
+
+
+  } else {
+      alert ('failed');
+  }
+}
+
+function startRecording() {
+    showVideo();
+    streamRecorder = webcamstream.record();
+    //setTimeout(stopRecording, 10000);
+}
+function stopRecording() {
+    streamRecorder.getRecordedData(postVideoToServer);
+}
+var dd;
+function postVideoToServer(videoblob) {
+
+    var data = {};
+    data.video = videoblob;
+    data.metadata = 'test metadata';
+    data.action = "upload_video";
+    dd = data;
+    video.src='';
+    //jQuery.post("http://www.foundthru.co.uk/uploadvideo.php", data, onUploadSuccess);
+}
+function onUploadSuccess() {
+    alert ('video uploaded');
+}
+
+// cdn.webrtc-experiment.com/MediaStreamRecorder.js
+/*
+var mediaConstraints = {
+    audio: !!navigator.mozGetUserMedia, // if firefox (don't use for chrome)
+    video: true  // if firefox or chrome
+};
+*/
+/*
+navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+
+function onMediaSuccess(stream) {
+    var mediaRecorder = new MediaStreamRecorder(stream);
+    mediaRecorder.mimeType = 'video/webm';
+    mediaRecorder.ondataavailable = function (blob) {
+        // POST/PUT "Blob" using FormData/XHR2
+        var blobURL = URL.createObjectURL(blob);
+        document.write('' + blobURL + '');
+    };
+    mediaRecorder.start(3000);
+}
+*/
+function onMediaError(e) {
+    console.error('media error', e);
+}
+
+</script>
+</html>
+

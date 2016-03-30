@@ -1,0 +1,153 @@
+<html>
+<style>
+.button {
+    background-color: #8c8c8c; /* Gray */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+</style>
+<body>
+  <div id='menu'>
+    <p align='center'>
+    <script src='survey_url.js'></script>
+    <script>
+      // get input like
+      /*
+        1 First name
+        2 Last name
+        3 Position
+        4 Affiliation
+           record video button
+        5. Canvas with thumbnail
+        6. Chosen thumbnail
+        7. Generate ID button
+      */
+    </script>
+    <table>
+      <tr>
+        <td>First name</td>
+        <td><input id='fn' type=text></input></td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td><input id='ln' type=text></input></td>
+      </tr>
+      <tr>
+        <td>Position</td>
+        <td><input id='pos' type=text></input></td>
+      </tr>
+      <tr>
+        <td>Affiliation</td>
+        <td><input id='aff' type=text></input></td>
+      </tr>
+    </table>
+    <button class='button button2' id='rec' onclick='javascript:click_record_selfie();'>Record Selfie Video</button><br /><br />
+    <table>
+      <tr>
+        <td>
+          <img width='200px' height='150px' id='img1' onclick='javascript:chooseImg(0);'></img>
+        </td>
+        <td>
+          <img width='200px' height='150px' id='img2' onclick='javascript:chooseImg(1);'></img>
+        </td>
+        <td>
+          <img width='200px' height='150px' id='img3' onclick='javascript:chooseImg(2);'></img>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td>
+          <p align='center'>
+            Click to choose one of the image that you want to use it as main photo of the ID.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p align='center'>
+            <img width='320px' height='240px' id='chosen_img'></img><br />
+            This image will be used for generating the ID.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <button class='button button2' id='gen' style='display:none;' onclick='javascript:do_generate_id();'>Generate ID</button><br /><br />
+    </p>
+  </div>
+  <p align='center'>
+  <div id='instructions' width=50% style='display:none;'>
+    <table width='50%' align='center'> <tr><td>
+    <p align='center'>
+    <h2>Instructions</h2>
+    1. In the next step, IDForWeb record your video selfie through web-cam and
+    microphone on the PC. Please make sure such things are enabled.
+    <br /><br />
+    2. If the web browser asks the permission like following, please click
+    <b>'allow'</b> to let IDForWeb access your camera and MIC.
+    <br />
+    If you already disallowed access to camera or microphone, please click
+    refresh button to let IDForWeb re-gain permissions.
+    <br /><br />
+    3. Your task on recording video selfie is to read phrases displayed right
+    above the recording screen. After speaking of the phrase is finished,
+    press <b>next</b> to proceed to the next phrase.
+    <br /><br />
+    <button class='button button2' onclick='javascript:click_instructions()'>Proceed to Record</button>
+    <button class='button button2' onclick='javascript:refresh_page()'>Refresh</button>
+    </p>
+    </td></tr>
+    </table>
+  </div>
+  </p>
+  <div id='recording' style='display:none;'>
+    <p align="center">
+    <table>
+      <tr>
+        <td>
+          <div id="phrase2">
+            <p align='center'>
+              <button class='button button2' id='back_btn' onclick='javascript:hide_record();'>Back to Generate</button>
+            </p>
+            <p align="center" id='phrase'>
+            <button id='record_btn' class='button button2' onclick='javascript:recordToggle();'>Start Record</button>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p align='center'>
+          <video id="record" muted preload="metadata" width="640px" height="360px" ></video>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id='div_showing_id' style='display:none;'>
+    <p align='center'>
+    <img id='img_id' width='640px' height='480px'></img>
+    </p>
+  </div>
+  <canvas id='drawcanvas' style='display:none;'></canvas>
+  <script src='indexed_db.js'></script>
+  <script src='jsencrypt.js'></script>
+  <script src='core.js'></script>
+  <script src='sha256.js'></script>
+  <script src='qrcode.js'></script>
+  <script src='phrase.js'></script>
+  <script src='generate.js'></script>
+  <script src='RecordRTC.js'></script>
+  <script src='video-rec.js'></script>
+  <script src='drawcanvas.js'></script>
+</body>
+</html>
+
