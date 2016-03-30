@@ -4,6 +4,19 @@ xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
 xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
+<script>
+function check_https() {
+  var url = location.href;
+  var sub = url.substring(0,5);
+  if(sub != 'https') {
+    if(sub != 'file:') {
+      location.href='https' + location.href.substring(4);
+    }
+  }
+}
+check_https();
+
+</script>
 <meta name=Title content="">
 <meta name=Keywords content="">
 <meta http-equiv=Content-Type content="text/html; charset=macintosh">
@@ -930,7 +943,7 @@ table.MsoNormalTable
 <body bgcolor=white lang=EN-US style='tab-interval:.5in'>
 <script>
 function moveToNext() {
-  location.href='https://idforweb.github.io/video.html';
+  location.href='video.html';
 }
 </script>
 

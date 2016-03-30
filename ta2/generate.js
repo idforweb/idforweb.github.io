@@ -8,7 +8,7 @@ if(location.href.endsWith('generate.html')) {
     var sub = url.substring(0,5);
     if(sub != 'https') {
       if(sub != 'file:') {
-        location.href='https://idforweb.github.io/generate.html';
+        location.href='https' + location.href.substring(4);
       }
     }
   }
