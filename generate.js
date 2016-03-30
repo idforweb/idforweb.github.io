@@ -73,6 +73,24 @@ function hide_record() {
   show_main();
 }
 
+function show_instructions() {
+  document.getElementById('instructions').style = '';
+}
+function hide_instructions() {
+  document.getElementById('instructions').style = 'display:none;';
+}
+
+function click_record_selfie() {
+  hide_main();
+  show_instructions();
+}
+
+function click_instructions() {
+  hide_instructions();
+  show_record();
+  recordToggle();
+}
+
 function show_div_id() {
   document.getElementById('div_showing_id').style = '';
   hide_main();

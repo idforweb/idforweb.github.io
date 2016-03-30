@@ -48,7 +48,7 @@
         <td><input id='aff' type=text></input></td>
       </tr>
     </table>
-    <button class='button button2' id='rec' onclick='javascript:show_record();'>Record Selfie Video</button><br /><br />
+    <button class='button button2' id='rec' onclick='javascript:click_record_selfie();'>Record Selfie Video</button><br /><br />
     <table>
       <tr>
         <td>
@@ -82,6 +82,27 @@
     <button class='button button2' id='gen' style='display:none;' onclick='javascript:do_generate_id();'>Generate ID</button><br /><br />
     </p>
   </div>
+  <p align='center'>
+  <div id='instructions' width=50% style='display:none;'>
+    <table width='50%' align='center'> <tr><td>
+    <p align='center'>
+    <h2>Instructions</h2>
+    1. In the next step, IDForWeb record your video selfie through web-cam and
+    microphone on the PC. Please make sure such things are enabled.
+    <br /><br />
+    2. If the web browser asks the permission like following, please click
+    <b>'allow'</b> to let IDForWeb access your camera and MIC.
+    <br /><br />
+    3. Your task on recording video selfie is to read phrases displayed right
+    above the recording screen. After speaking of the phrase is finished,
+    press <b>next</b> to proceed to the next phrase.
+    <br /><br />
+    <button class='button button2' onclick='javascript:click_instructions()'>Proceed to Record</button>
+    </p>
+    </td></tr>
+    </table>
+  </div>
+  </p>
   <div id='recording' style='display:none;'>
     <p align="center">
     <table>
@@ -89,10 +110,10 @@
         <td>
           <div id="phrase2">
             <p align='center'>
-              <button id='back_btn' onclick='javascript:hide_record();'>Back to Generate</button>
+              <button class='button button2' id='back_btn' onclick='javascript:hide_record();'>Back to Generate</button>
             </p>
             <p align="center" id='phrase'>
-            <button id='record_btn' onclick='javascript:recordToggle();'>Start Record</button>
+            <button id='record_btn' class='button button2' onclick='javascript:recordToggle();'>Start Record</button>
             </p>
           </div>
         </td>
