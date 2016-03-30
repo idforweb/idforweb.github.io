@@ -80,6 +80,10 @@ function hide_instructions() {
   document.getElementById('instructions').style = 'display:none;';
 }
 
+function refresh_page() {
+  location.href='generate.html';
+}
+
 function click_record_selfie() {
   hide_main();
   show_instructions();

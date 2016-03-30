@@ -1,0 +1,1 @@
+../verifyphoto.js
