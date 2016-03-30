@@ -1,1 +1,0 @@
-../gumadapter.js

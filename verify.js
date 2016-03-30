@@ -15,7 +15,7 @@ var VerifyGlobals = VerifyGlobals || {
 };
 
 function survey() {
-  location.href='https://goo.gl/forms/xhxUZ5GhZp';
+  location.href=survey_url;
 }
 function menu() {
   location.href='stage2.html';

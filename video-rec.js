@@ -115,7 +115,7 @@ PhrasePlayer.prototype.reject_id = function() {
     }
     // move to survey
     location.hash = '';
-    location.href='https://goo.gl/forms/xhxUZ5GhZp';
+    location.href = survey_url;
   }
   else {
     hide_record();
@@ -139,7 +139,7 @@ PhrasePlayer.prototype.accept_id = function() {
       hide_verify();
     }
     location.hash = '';
-    location.href='https://goo.gl/forms/xhxUZ5GhZp';
+    location.href = survey_url;
   }
 };
 
