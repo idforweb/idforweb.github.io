@@ -81,7 +81,7 @@ function hide_instructions() {
 }
 
 function refresh_page() {
-  location.href='generate.html';
+  location.reload(true);
 }
 
 function click_record_selfie() {
