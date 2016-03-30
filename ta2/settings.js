@@ -15,7 +15,7 @@ function check_gtid() {
 
 function update_gtid() {
   var input = document.getElementById('gtid_input');
-  if(input.value == undefined || typeof(input.value) != string || input.value.length < 6) {
+  if(input.value == undefined || typeof(input.value) != 'string' || input.value.length < 6) {
     alert('GTID must be longer than 6 digits');
     return;
   }
