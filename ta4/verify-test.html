@@ -1,0 +1,86 @@
+<html>
+<style>
+.button {
+    background-color: #8c8c8c; /* Gray */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+</style>
+<script>
+
+</script>
+<body>
+  <div id='menu'>
+    <p align='center'>
+    Click on the ID to verify the video selfie. <br />
+    Tools: <button onclick='javascript:upload_all();'>Upload All</button>
+    <button onclick='javascipt:survey();'>Go to survey</button>
+    <button onclick='javascipt:menu();'>Back to menu</button>
+    <table>
+      <tr>
+        <td>
+          <p align='center' id='id_list'>
+          </p>
+        </td>
+      </tr>
+    </table>
+    </p>
+  </div>
+  <div id='recording' style='display:none;'>
+    <p align="center">
+    <table>
+      <tr>
+        <td>
+          <div id="phrase2">
+            <p align='center'>
+              <button id='back_btn' onclick='javascript:hide_verify();'>Back to Verify Menu</button>
+            </p>
+            <p align="center" id='phrase'>
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p align='center'>
+          <video id="record" muted preload="metadata" width="640px" height="360px" ></video>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="verifycamera" style='display:none;'>
+    <video id="stillshotvideo"></video>
+    <button id="startbutton">Take photo</button>
+    <canvas id="stillshotcanvas">
+    </canvas>
+    <div class="output">
+      <img id="stillshotphoto" alt="The screen capture will appear in this box.">
+    </div>
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src='settings.js'></script>
+<script src="post_to_s3-test.js"></script>
+<script src='indexed_db.js'></script>
+<script src='jsencrypt.js'></script>
+<script src='core.js'></script>
+<script src='sha256.js'></script>
+<script src='forge.min.js'></script>
+<script src='qrcode.js'></script>
+<script src='phrase.js'></script>
+<script src='generate.js'></script>
+<script src='drawcanvas.js'></script>
+<script src='RecordRTC.js'></script>
+<script src='video-rec.js'></script>
+<script src='verify.js'></script>
+<script src='verifyphoto.js'></script>
+</html>
