@@ -120,19 +120,24 @@ PhrasePlayer.prototype.reject_id = function() {
     else {
       msg += " 'X' }";
     }
-    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
-    post_data(fn, msg, function() {
-      console.log("Uploading result OK");
-    }, function () {
-      console.log("Uploading result failed");
-    });
-
     if(hide_verify != undefined) {
       hide_verify();
     }
     // move to survey
-    location.hash = '';
-    //location.href = retrieve_survey_url();
+    function move_to_survey() {
+      location.hash = '';
+      location.href = retrieve_survey_url();
+    }
+    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
+    post_data(fn, msg, function() {
+      console.log("Uploading result OK");
+      move_to_survey();
+    }, function () {
+      console.log("Uploading result failed");
+      move_to_survey();
+    });
+
+
   }
   else {
     hide_record();
@@ -161,19 +166,23 @@ PhrasePlayer.prototype.accept_id = function() {
       msg += " 'O' }";
     }
 
-    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
-    post_data(fn, msg, function() {
-      console.log("Uploading result OK");
-    }, function () {
-      console.log("Uploading result failed");
-    });
-
-
     if(hide_verify != undefined) {
       hide_verify();
     }
-    location.hash = '';
-    //location.href = retrieve_survey_url();
+    // move to survey
+    function move_to_survey() {
+      location.hash = '';
+      location.href = retrieve_survey_url();
+    }
+    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
+    post_data(fn, msg, function() {
+      console.log("Uploading result OK");
+      move_to_survey();
+    }, function () {
+      console.log("Uploading result failed");
+      move_to_survey();
+    });
+
   }
 };
 
