@@ -15,8 +15,12 @@ function check_gtid() {
 
 function update_gtid() {
   var input = document.getElementById('gtid_input');
-  if(input.value == undefined || typeof(input.value) != 'string' || input.value.length < 6) {
-    alert('GTID must be longer than 6 digits');
+  if(input.value == undefined || typeof(input.value) != 'string' || input.value.length < 8) {
+    alert('GTID must be longer than 8 digits');
+    return;
+  }
+  if(  ('' + (input.value | 0)) != input.value  ) {
+    alert('For GTID, only digits are allowed');
     return;
   }
   localStorage['gtid'] = input.value;
