@@ -54,6 +54,7 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   }
   this.stamps = [];
   this.mode = mode;
+  this.correct = true;
   if(mode == 'verify' || mode == 'verify2') {
     this.target_video_elem = target_video_elem;
     if(typeof target_video_elem == 'string') {
@@ -70,6 +71,7 @@ function PhrasePlayer(phrases, mode, target_html_elem, target_video_elem, times)
   this.phrases = phrases.slice(0);
   if(this.mode == 'verify2') {
     if( ((Math.random() * 2)|0) == 1 ) {
+      this.correct = false;
       /*
       var t1 = this.phrases[1];
       var t2 = this.phrases[2];
@@ -110,6 +112,21 @@ PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
   alert('ID is rejected!');
   if(this.mode == 'verify2') {
+    var msg = "{ 'reject' : ";
+    if(this.correct == true) {
+      alert('But the ID should be accepted, because phrases was correct');
+      msg += " 'O' }";
+    }
+    else {
+      msg += " 'X' }";
+    }
+    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
+    post_data(fn, msg, function() {
+      console.log("Uploading result OK");
+    }, function () {
+      console.log("Uploading result failed");
+    });
+
     if(hide_verify != undefined) {
       hide_verify();
     }
@@ -135,6 +152,23 @@ PhrasePlayer.prototype.accept_id = function() {
   }
   if(this.mode == 'verify2') {
     alert('ID is verified');
+    var msg = "{ 'accept' : ";
+    if(this.correct == false) {
+      alert('But the ID should be rejected, because phrases was not matched with the video');
+      msg += " 'X' }";
+    }
+    else {
+      msg += " 'O' }";
+    }
+
+    var fn = "verify_result_" + get_gtid() + '_' + VerifyGlobals.get_session_number();
+    post_data(fn, msg, function() {
+      console.log("Uploading result OK");
+    }, function () {
+      console.log("Uploading result failed");
+    });
+
+
     if(hide_verify != undefined) {
       hide_verify();
     }
