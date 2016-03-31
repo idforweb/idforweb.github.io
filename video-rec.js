@@ -344,7 +344,7 @@ PhrasePlayer.prototype.update_record_html = function() {
 
 function start_recording() {
   if(rtcRecorder != null) {
-    rtcRecorder = rtcRecorder.startRecording();
+    rtcRecorder.startRecording();
     console.log('start recording');
   }
   phrasePlayer.update_record_html();
@@ -352,6 +352,7 @@ function start_recording() {
 var video_uri = null;
 function stop_recording(phrases, timings) {
   if(rtcRecorder != null) {
+    console.log("Stopping recording");
     rtcRecorder.stopRecording(function() {
       console.log("Recording has stopped correctly");
       var video_record = document.querySelector('video');
