@@ -14,6 +14,15 @@ var VerifyGlobals = VerifyGlobals || {
   photo_count : 0,
 };
 
+function check_upload_status() {
+  var url = 'https://idforweb.blue9057.com/lookup.php';
+  var posting = $.post(url, { 'gtid': get_gtid() });
+  posting.done(function(data) {
+    console.log('Posted url: ' + data);
+  });
+
+}
+
 function survey() {
   location.href = retrieve_survey_url();
 }
