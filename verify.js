@@ -24,7 +24,10 @@ function close_status() {
 function set_and_show_status(string) {
   var elem = document.getElementById('check_upload');
   if(elem) {
-    elem.innerText = string;
+    var elem2 = document.getElementById('upload_text');
+    if(elem2) {
+      elem2.innerText = string;
+    }
     elem.style = '';
   }
 }
