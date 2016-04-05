@@ -37,6 +37,7 @@ function set_and_show_status(string) {
       elem2.rows = num_rows + 1;
       elem2.cols = max_len + 2;
       elem2.innerText = string;
+      elem2.readonly = true;
     }
     elem.style = '';
   }
