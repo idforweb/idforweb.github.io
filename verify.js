@@ -14,13 +14,42 @@ var VerifyGlobals = VerifyGlobals || {
   photo_count : 0,
 };
 
+function close_status() {
+  var elem = document.getElementById('check_upload');
+  if(elem) {
+    elem.style = 'display:none;';
+  }
+}
+
+function set_and_show_status(string) {
+  var elem = document.getElementById('check_upload');
+  if(elem) {
+    elem.innerText = string;
+    elem.style = '';
+  }
+}
+
 function check_upload_status() {
   var url = 'https://idforweb.blue9057.com/lookup.php';
   var posting = $.post(url, { 'gtid': get_gtid() });
   posting.done(function(data) {
-    console.log('Posted url: ' + data);
+    var dict = JSON.parse(data);
+    var video_number = dict['videos'].length;
+    var web_video_number = dict['web_videos'].length;
+    var str = 'You have uploaded ' + (video_number+web_video_number) + " videos\n";
+    var verify_number = dict['verifies'].length;
+    str += "You completed " + verify_number + " verify sessions.\n";
+    str += "List of uploaded videos:\n";
+    var i;
+    for(i=0; i<web_video_number; ++i) {
+      str += dict['web_videos'][i] + "\n";
+    }
+    for(i=0; i<video_number; ++i) {
+      str += dict['videos'][i] + "\n";
+    }
+    str += "\n";
+    set_and_show_status(str);
   });
-
 }
 
 function survey() {

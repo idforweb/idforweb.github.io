@@ -24,8 +24,14 @@
     <p align='center'>
     Click on the ID to verify the video selfie. <br />
     Tools: <button onclick='javascript:upload_all();'>Upload All</button>
-    <button onclick='javascipt:survey();'>Go to survey</button>
-    <button onclick='javascipt:menu();'>Back to menu</button>
+    <button onclick='javascript:survey();'>Go to survey</button>
+    <button onclick='javascript:menu();'>Back to menu</button><br />
+    <button onclick='javascript:check_upload_status();'>Check Upload Status</button><br />
+    <div id='check_upload' style='display:none;'>
+      <textarea id='upload_text'>
+      </textarea><br />
+      <button onclick='javascript:close_status();'>Close Status</button>
+    </div>
     <table>
       <tr>
         <td>
