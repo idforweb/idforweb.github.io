@@ -55,7 +55,7 @@ function check_upload_status() {
     var web_video_number = dict['web_videos'].length;
     var str = 'You have uploaded ' + (video_number+web_video_number) + " videos\n";
     var verify_number = dict['verifies'].length;
-    str += "You completed " + verify_number + " verify sessions.\n";
+    str += "You have completed " + verify_number + " verify sessions.\n";
     str += "List of uploaded videos:\n";
     var i;
     for(i=0; i<web_video_number; ++i) {
