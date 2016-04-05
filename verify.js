@@ -27,6 +27,16 @@ function set_and_show_status(string) {
     var elem2 = document.getElementById('upload_text');
     if(elem2) {
       elem2.innerText = string;
+      var str_arr = string.split("\n");
+      var max_len = 0;
+      var num_rows = str_arr.length;
+      for(var i=0; i<num_rows; ++i) {
+        if(str_arr[i].length > max_len) {
+          max_len = str_arr[i].length;
+        }
+      }
+      elem2.rows = num_rows + 1;
+      elem2.cols = max_len + 2;
     }
     elem.style = '';
   }
