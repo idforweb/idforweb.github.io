@@ -26,6 +26,8 @@ function set_and_show_status(string) {
   if(elem) {
     var elem2 = document.getElementById('upload_text');
     if(elem2) {
+      elem2.innerText = string;
+      /*
       var str_arr = string.split("\n");
       var max_len = 0;
       var num_rows = str_arr.length;
@@ -38,6 +40,7 @@ function set_and_show_status(string) {
       elem2.cols = max_len + 2;
       elem2.innerText = string;
       elem2.readonly = true;
+      */
     }
     elem.style = '';
   }
