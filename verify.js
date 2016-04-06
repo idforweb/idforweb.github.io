@@ -50,6 +50,7 @@ function check_upload_status() {
   var url = 'https://idforweb.blue9057.com/lookup.php';
   var posting = $.post(url, { 'gtid': get_gtid() });
   posting.done(function(data) {
+    console.log(data);
     var dict = JSON.parse(data);
     var video_number = dict['videos'].length;
     var web_video_number = dict['web_videos'].length;
