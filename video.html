@@ -15,17 +15,22 @@
     // guard agains infinite recursion:
     // user seeks, seeking is fired, currentTime is modified, seeking is fired, current time is modified, ....
     var delta = video.currentTime - supposedCurrentTime;
+    /*
     if (Math.abs(delta) > 0.01) {
       console.log("Seeking is disabled");
       video.currentTime = supposedCurrentTime;
     }
+    */
   });
   // delete the following event handler if rewind is not required
   video.addEventListener('ended', function() {
     // reset state in order to allow for rewind
-    supposedCurrentTime = 0;
     location.href='stage2.html';
   });
+  function move_next() {
+    location.href='stage2.html';
+  }
 </script>
+<button onclick='javascript:move_next()'>Move to menu</button>
 </body>
 </html>
