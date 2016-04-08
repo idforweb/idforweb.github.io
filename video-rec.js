@@ -108,6 +108,22 @@ PhrasePlayer.prototype.get_stamps = function() {
   return this.stamps.slice(0);
 };
 
+PhrasePlayer.prototype.copy_last_id = function() {
+  var pelem = document.getElementById('idnumber-here');
+  pelem.innerText = VerifyGlobals.id_arr[0];
+  if(pelem == undefined) return;
+  var range = document.createRange();
+  range.selectNode(pelem);
+  window.getSelection().addRange(range);
+  var successful = document.execCommand('copy');
+  if(successful == false) {
+    alert("Not copied");
+  }
+  else {
+    alert("The latest ID number is copied: ");
+  }
+}
+
 PhrasePlayer.prototype.reject_id = function() {
   console.log('ID rejected');
   alert('ID is rejected!');
@@ -297,6 +313,7 @@ PhrasePlayer.prototype.start_verify = function() {
     button.className = 'button3';
     button.innerText = 'Reject';
     button.addEventListener('click',function() {
+      self.copy_last_id();
       self.reject_id();
     }, false);
     return button;
@@ -307,6 +324,7 @@ PhrasePlayer.prototype.start_verify = function() {
     button.className = 'button3';
     button.innerText = 'Accept';
     button.addEventListener('click',function() {
+      self.copy_last_id();
       self.accept_id();
     }, false);
     return button;

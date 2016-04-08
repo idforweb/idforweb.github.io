@@ -144,7 +144,7 @@ function draw_id(id, idx) {
       var pelem = document.getElementById('idnumber-here');
       if(pelem) {
         // get the last created ID...
-        pelem.innerText = ID['idNumber'];
+        pelem.innerText = VerifyGlobals.id_arr[0];
       }
       // do something
       // create PhrasePlayer
