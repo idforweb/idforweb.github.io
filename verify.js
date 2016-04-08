@@ -141,6 +141,11 @@ function draw_id(id, idx) {
     return function() {
       console.dir(ID);
       console.log('I wanna verify ' + ID['idNumber']);
+      var pelem = document.getElementById('idnumber-here');
+      if(pelem) {
+        // get the last created ID...
+        pelem.innerText = ID['idNumber'];
+      }
       // do something
       // create PhrasePlayer
       phrasePlayer = new PhrasePlayer(ID['phrases'], 'verify2',
@@ -255,10 +260,12 @@ if(location.href.split('#')[0].endsWith('verify.html')) {
         });
         VerifyGlobals.num_array = data_array.slice(0);
         var i;
+        VerifyGlobals.id_arr = [];
         for(i=0; i<data_array.length; ++i) {
           b2bDB.retrieve_id_with_number(data_array[i].idNumber, function(result) {
             // add result into the list.
             VerifyGlobals.IDs[result['idNumber']] = result;
+            id_arr.append(result['idNumber']);
             if(Object.keys(VerifyGlobals.IDs).length == VerifyGlobals.num_array.length) {
               loaded_all();
             }
