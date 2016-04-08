@@ -65,6 +65,10 @@ function drawAllText(first_name, last_name, position, affiliation) {
   drawText("Issue Date: " + getDate(), 500, 700, font);
   var idNumber = getRandomID();
   Globals.idNumber = idNumber;
+  var pelem = document.getElementById('idnumberhere');
+  if(pelem) {
+    pelem.innerText = idNumber;
+  }
   drawText("ID Number: " + idNumber, 500, 775, font);
 }
 
