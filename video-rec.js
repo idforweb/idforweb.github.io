@@ -246,6 +246,7 @@ PhrasePlayer.prototype.start_verify = function() {
   var self = this;
   function getBackButton() {
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Back';
     button.addEventListener('click',function() {
       self.current_position -= 1;
@@ -269,6 +270,7 @@ PhrasePlayer.prototype.start_verify = function() {
 
   function getPauseButton() {
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Pause';
     button.addEventListener('click',function() {
       self.paused = true;
@@ -281,6 +283,7 @@ PhrasePlayer.prototype.start_verify = function() {
 
   function getDoneButton() {
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Play';
     button.addEventListener('click',function() {
       self.paused = false;
@@ -291,6 +294,7 @@ PhrasePlayer.prototype.start_verify = function() {
 
   function getRejectButton() {
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Reject';
     button.addEventListener('click',function() {
       self.reject_id();
@@ -300,6 +304,7 @@ PhrasePlayer.prototype.start_verify = function() {
 
   function getAcceptButton() {
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Accept';
     button.addEventListener('click',function() {
       self.accept_id();
@@ -316,7 +321,7 @@ PhrasePlayer.prototype.start_verify = function() {
     header = 'Phrase ' + this.current_position + ': ';
   }
 
-  this.target_html_elem.innerText = header + current_phrase + "\n";
+  this.target_html_elem.innerHTML = header + "<font color='blue'><b>" + current_phrase + "</b></font><br />";
   this.target_html_elem.appendChild(getBackButton());
   //this.target_html_elem.appendChild(getPlayButton());
   this.target_html_elem.appendChild(getPauseButton());
@@ -343,6 +348,7 @@ PhrasePlayer.prototype.update_record_html = function() {
 
     // create button, append child
     var button = document.createElement('button');
+    button.className = 'button3';
     button.innerText = 'Done';
     var self = this;
     button.addEventListener('click',function() {
@@ -361,8 +367,11 @@ PhrasePlayer.prototype.update_record_html = function() {
     else {
       header = 'Phrase ' + this.current_position + ': ';
     }
-    this.target_html_elem.innerText = header + current_phrase + "\n";
+
+    this.target_html_elem.innerHTML = header + "<font color='blue'><b>" + current_phrase + "</b></font><br />";
+    //this.target_html_elem.innerText = header + current_phrase + "\n";
     var button = document.createElement('button');
+    button.className = 'button3';
     if(is_the_last) {
       button.innerText = 'Done';
       var self = this;
