@@ -120,7 +120,7 @@ PhrasePlayer.prototype.copy_last_id = function() {
     alert("Not copied");
   }
   else {
-    alert("The latest ID number is copied: ");
+    alert("The latest ID number is copied: " + successful);
   }
 }
 
