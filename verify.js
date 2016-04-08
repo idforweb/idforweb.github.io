@@ -265,7 +265,7 @@ if(location.href.split('#')[0].endsWith('verify.html')) {
           b2bDB.retrieve_id_with_number(data_array[i].idNumber, function(result) {
             // add result into the list.
             VerifyGlobals.IDs[result['idNumber']] = result;
-            VerifyGlobals.id_arr.append(result['idNumber']);
+            VerifyGlobals.id_arr.push(result['idNumber']);
             if(Object.keys(VerifyGlobals.IDs).length == VerifyGlobals.num_array.length) {
               loaded_all();
             }
