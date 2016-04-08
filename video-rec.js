@@ -109,6 +109,7 @@ PhrasePlayer.prototype.get_stamps = function() {
 };
 
 PhrasePlayer.prototype.copy_last_id = function() {
+  /*
   var pelem = document.getElementById('idnumber-here');
   pelem.innerText = VerifyGlobals.id_arr[0];
   if(pelem == undefined) return;
@@ -122,6 +123,7 @@ PhrasePlayer.prototype.copy_last_id = function() {
   else {
     alert("The latest ID number is copied: " + successful + " " + pelem.innerText);
   }
+  */
 }
 
 PhrasePlayer.prototype.reject_id = function() {
