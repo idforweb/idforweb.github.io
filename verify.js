@@ -265,13 +265,18 @@ if(location.href.split('#')[0].endsWith('verify.html')) {
         });
         VerifyGlobals.num_array = data_array.slice(0);
         var i;
+        var not_loaded = 0;
         VerifyGlobals.id_arr = [];
         for(i=0; i<data_array.length; ++i) {
           b2bDB.retrieve_id_with_number(data_array[i].idNumber, function(result) {
             // add result into the list.
+            if(result == undefined) {
+              not_loaded += 1;
+              return;
+            }
             VerifyGlobals.IDs[result['idNumber']] = result;
             VerifyGlobals.id_arr.push(result['idNumber']);
-            if(Object.keys(VerifyGlobals.IDs).length == VerifyGlobals.num_array.length) {
+            if(Object.keys(VerifyGlobals.IDs).length + not_loaded == VerifyGlobals.num_array.length) {
               loaded_all();
             }
           },
