@@ -133,6 +133,12 @@ function upload_all() {
 var phrasePlayer = phrasePlayer || undefined;
 
 function draw_id(id, idx) {
+  if (id == undefined || id['id_picture'] == undefined ||
+      id['idNumber'] == undefined || id['phrases'] == undefined ||
+        id['videoURL'] == undefined )
+    {
+      return;
+    }
   // create img element
   var p = document.getElementById('id_list');
   var img = document.createElement('img');
