@@ -109,8 +109,12 @@ function upload_all() {
   for(i=0; i<VerifyGlobals.num_array.length; ++i) {
     var idNumber = VerifyGlobals.num_array[i]['idNumber'];
     var ID = VerifyGlobals.IDs[idNumber];
-    if(ID['uploaded'] != true) {
-      upload_list.push(ID);
+    if(ID == undefined) {
+    }
+    else {
+      if(ID['uploaded'] != true) {
+        upload_list.push(ID);
+      }
     }
   }
   var cnt = 0;
