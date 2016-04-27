@@ -26,6 +26,7 @@ function init_recording() {
     rtcRecorder = new RecordRTC(stream, {
       type: 'video',
       numberOfAudioChannels: 1,
+      mimeType : "video/webm",
       bufferSize: 16384,
       sampleRate: 44100,
       video: videoElem,
